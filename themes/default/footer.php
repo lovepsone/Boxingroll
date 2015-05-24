@@ -1,4 +1,0 @@
-<?
-	Footer();
-	echo '</body></html>';
-?>
