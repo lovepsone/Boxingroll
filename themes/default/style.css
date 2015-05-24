@@ -1,0 +1,50 @@
+* { padding : 0;margin : 0;}
+body { font-size:15px; background-color: #010E16;} 
+.HeadBody {width:100%; height:89px; border: 0px;}
+.HeadBodyRight {width:830px; height:89px; background-image: url('images/HeadBodyRight.png'); background-repeat: no-repeat; background-size: 100% 100%; border: 0px;} 
+.HeadBodyLeft {height:89px; background-image: url('images/HeadBodyLeft.png'); background-repeat: no-repeat; background-size: 100% 100%; border: 0px;} 
+.inputAuth{ width:130px; height:25px; background-image: url('images/inputAuth.gif'); background-repeat: no-repeat; background-size: 100% 100%; border:0px; color:#ffffff; text-indent: 4px;}
+
+a.btnAuth {display: block; float: left; color: #ffffff; text-decoration: none; background: url(images/btnAuthbg_r.gif) top right no-repeat; padding-right: 2px; outline: none;}
+a.btnAuth span {
+width:125px;
+font-size:14px;
+display: block;
+line-height: 0px;
+background: url(images/btnAuthbg.gif) no-repeat;
+padding: 12px 0px 13px 26px;
+}
+
+a.btnAuth:hover {background-position: 100% -25px;}
+a.btnAuth:hover span {background-position: 0% -25px;color: #ffffff;}
+
+.headNav { width:980px; height:84px; background-image: url('images/navbg.gif');background-size: 100% 100%; }
+.headNav a {text-decoration: none; font-size:22px; margin-left:20px; position:relative; top: 30px; color:#0AADD2;}
+.headNav a:hover {color: #ffffff;}
+.boxbg {background-image: url('images/bg-subpage.jpg');background-size: 100% 100%; min-width: 100%; min-height: 572px; color:#ffffff;}
+.boxTitle {height:40px; color: #ffffd2; font-size:23px;}
+td.Box a {text-decoration: none; color:#0AADD2; font-size:17px; }
+td.Box a:hover {color: #ffffff;}
+.BoxButton {height:25px; background-image: url('images/btnBG.gif'); background-color:#0F3649; border:1px; font-size:14px; border-radius:3px; color:#ffffff; cursor: pointer;}
+
+.qtip{
+	position: absolute;
+	left: -28000px;
+	top: -28000px;
+	display: none;
+
+	max-width: 300px;
+	min-width: 50px;
+
+	font-size: 13px;
+	line-height: 12px;
+
+	direction: ltr;
+
+	box-shadow: none;
+	padding: 0;
+	background-image: url('images/tooltipBody.png');
+	color:#ffffff;
+}
+
+.footer {width:100%; height:84px; background-image: url('images/navbg.gif'); background-repeat: no-repeat; background-size: 100% 100%; color:#0AADD2; text-decoration: none;}
