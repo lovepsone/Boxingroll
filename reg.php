@@ -2,6 +2,8 @@
 
 	require_once 'maincore.php';
 	require_once THEMES.'header.php';
+	if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+		Redirect(BASEDIR.'index.php', true);
 	HeadMenu();
 
 	openbox($locale['b_reg']);

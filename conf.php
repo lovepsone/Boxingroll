@@ -1,10 +1,9 @@
 <?
-#######################################
-# Survarium Armory configuration file #
-#######################################
+##################################
+# BoxingRoll configuration file #
+#################################
 $Config = array();
 $Config['mysql'] = array();
-$Config['settings'] = array();
 ##############################################################################################
 # MySQL Database Configuration
 # 	$WCFConfig['mysql']['hostname']
@@ -29,8 +28,4 @@ $Config['mysql']['password'] = 'mangos';
 $Config['mysql']['dbname'] = 'boosterroll';
 $Config['mysql']['charset'] = 'UTF8';
 $Config['mysql']['error'] = true;
-
-$Config['settings']['locale'] = 'ru';
-$Config['settings']['theme'] = 'like';
-$Config['settings']['version'] = '0.2.1';
 ?>

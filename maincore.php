@@ -25,13 +25,8 @@
 	define("BASEDIR", $folder_level);
 	require_once BASEDIR.'conf.php';
 
-	// theme
-	if (file_exists(BASEDIR."themes/".$Config['settings']['theme']))
-		define("THEMES", BASEDIR."themes/".$Config['settings']['theme']."/");
-	else
-		define("THEMES", BASEDIR."themes/default/");
-
 	define("INCLUDES", BASEDIR."include/");
+	define("ADMINS", BASEDIR."admin/");
 	define("SELF", basename($_SERVER['PHP_SELF']));
 
 	$DB = NULL;
@@ -41,9 +36,18 @@
 	$DBH = new DB("mysql:host=".$Config['mysql']['hostname'].";dbname=".$Config['mysql']['dbname'], $Config['mysql']['username'], $Config['mysql']['password'], $Config['mysql']['charset']);
 	$DBH->error = $Config['mysql']['error'];
 
-	if(!@include(BASEDIR.'locale/'.$Config['settings']['locale'].'/locale.php'))
+	$STH = $DBH->prepare("SELECT * FROM settings`");
+	$STH->execute();
+	while($row = $STH->fetch(PDO::FETCH_ASSOC))
+		$Config[$row['setting']] = $row['value'];
+	// locale
+	if(!@include(BASEDIR.'locale/'.$Config['StartLocale'].'/locale.php'))
 		die("<b>Error:</b> can not loaded locale!!!");
-
+	// theme
+	if (file_exists(BASEDIR."themes/".$Config['theme']))
+		define("THEMES", BASEDIR."themes/".$Config['theme']."/");
+	else
+		define("THEMES", BASEDIR."themes/default/");
 
 	function GenSalt()
 	{
