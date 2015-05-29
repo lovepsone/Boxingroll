@@ -27,6 +27,11 @@ td.Box a:hover {color: #ffffff;}
 .boxRight a {color:#6495ED; font-size:15px; padding: 10px; }
 .boxRight a:hover {color:#ffffff; font-size:15px; padding: 10px; }
 
+.NewsHead { padding-left:15%; }
+.NewsHeadHR { background:#0AADD2; width:90%; border:0px;}
+.NewsBody { padding-left: 10%; padding-right:10%; color:#0AADD2;}
+.NewsFotter { padding-right:15%;}
+
 .footer {width:100%; height:84px; background-image: url('images/navbg.gif'); background-repeat: no-repeat; background-size: 100% 100%; color:#0AADD2; text-decoration: none;}
 
 #chat { height: 400px; }

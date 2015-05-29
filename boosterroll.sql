@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-05-26 23:06:18
+Date: 2015-05-29 14:39:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,12 +40,14 @@ CREATE TABLE `news` (
   `news` text collate utf8_unicode_ci NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of news
 -- ----------------------------
-INSERT INTO `news` VALUES ('1', 'Добро пожаловать на наш сайт', '<p>blfdlgfdslgfdsfds few fewfewf wfw wtwetw wtw twtw wtw tww twtw wtwt wt</p>', '2015-05-26');
+INSERT INTO `news` VALUES ('1', 'О системе античита', '<p>Одна из тем, волнующих игроков &mdash; это борьба с пользователями, которые не стесняются прибегать к нечестным методам игры, для получения преимущества. Ведущий программист Vostok Games Дмитрий Ясенев пояснил, как работает текущая система защиты в Survarium и что будет представлять собой новая версия античита.</p>', '2015-05-28');
+INSERT INTO `news` VALUES ('4', 'Провожаем весну с премиумом! (ОБНОВЛЕНО)', '<p>Солнечные деньки становятся все жарче и возвещают нам о завершении весны и скором наступлении лета. Мы предлагаем провести это время в Survarium, а бесплатный премиум-аккаунт поможет вам добиться впечатляющих результатов!<br />Акция началась 27 мая в 12:00 и продлится сутки.</p>', '2015-05-28');
+INSERT INTO `news` VALUES ('5', 'Превью обновления Survarium 0.29', '<p>Разработка обновления 0.29 вышла на финишную прямую, и скоро мы будем рады представить его на суд игроков в рамках тестирования на публичном тестовом сервере. А пока предлагаем ознакомиться с самыми заметными нововведениями грядущего обновления.</p>', '2015-05-28');
 
 -- ----------------------------
 -- Table structure for `settings`

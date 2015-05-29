@@ -9,11 +9,11 @@
 
 	while($row = $STH->fetch(PDO::FETCH_ASSOC))
 	{
-		echo '<tr><td align="center" valign="top"><hr width="90%"></td></tr>';
-		echo '<tr><td><h1>'.$row['name'].'</h1></td></tr>';
-		echo '<tr><td>'.$row['news'].'</td></tr>';
-		echo '<tr><td>'.$row['date'].'</td></tr>';
-		echo '<tr><td align="center" valign="top"><hr width="90%"></td></tr>';
+		echo '<tr><td align="center" valign="top"><hr class="NewsHeadHR" size="5"></td></tr>';
+		echo '<tr><td class="NewsHead"><h1>'.$row['name'].'</h1></td></tr>';
+		echo '<tr><td align="center" valign="top"><hr class="NewsHeadHR" size="5"></td></tr>';
+		echo '<tr><td class="NewsBody">'.$row['news'].'</td></tr>';
+		echo '<tr><td class="NewsFotter" align="right">'.$row['date'].'</td></tr>';
 	}
 	closebox();
 	require_once THEMES.'footer.php';
