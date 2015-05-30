@@ -11,7 +11,7 @@ a.btnAuth:hover span {background-position: 0% -25px;color: #ffffff;}
 .headNav { width:980px; height:84px; background-image: url('images/navbg.gif');background-size: 100% 100%; }
 .headNav a {text-decoration: none; font-size:22px; margin-left:20px; position:relative; top: 30px; color:#0AADD2;}
 .headNav a:hover {color: #ffffff;}
-.MainBg {background-image: url('images/bg-subpage.jpg'); background-size: 100% 100%; min-width: 100%; min-height: 572px; color:#ffffff;}
+.MainBg {background-image: url('images/bg-subpage.jpg'); background-position: 0% 0%; background-repeat: no-repeat; background-size: 100% auto; width: 100%; min-height: 572px; color:#ffffff; padding-top:25px; padding-bottom:25px;}
 
 td.Box a {text-decoration: none; color:#0AADD2; font-size:17px; }
 td.Box a:hover {color: #ffffff;}

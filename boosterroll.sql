@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : lllll
+Source Server         : game
 Source Server Version : 50051
 Source Host           : localhost:3306
 Source Database       : boosterroll
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-05-29 14:39:59
+Date: 2015-05-30 13:31:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,7 +40,7 @@ CREATE TABLE `news` (
   `news` text collate utf8_unicode_ci NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of news
@@ -48,6 +48,8 @@ CREATE TABLE `news` (
 INSERT INTO `news` VALUES ('1', 'О системе античита', '<p>Одна из тем, волнующих игроков &mdash; это борьба с пользователями, которые не стесняются прибегать к нечестным методам игры, для получения преимущества. Ведущий программист Vostok Games Дмитрий Ясенев пояснил, как работает текущая система защиты в Survarium и что будет представлять собой новая версия античита.</p>', '2015-05-28');
 INSERT INTO `news` VALUES ('4', 'Провожаем весну с премиумом! (ОБНОВЛЕНО)', '<p>Солнечные деньки становятся все жарче и возвещают нам о завершении весны и скором наступлении лета. Мы предлагаем провести это время в Survarium, а бесплатный премиум-аккаунт поможет вам добиться впечатляющих результатов!<br />Акция началась 27 мая в 12:00 и продлится сутки.</p>', '2015-05-28');
 INSERT INTO `news` VALUES ('5', 'Превью обновления Survarium 0.29', '<p>Разработка обновления 0.29 вышла на финишную прямую, и скоро мы будем рады представить его на суд игроков в рамках тестирования на публичном тестовом сервере. А пока предлагаем ознакомиться с самыми заметными нововведениями грядущего обновления.</p>', '2015-05-28');
+INSERT INTO `news` VALUES ('6', 'Календарь Survarium на июнь', '<p>Уже не за горами тот момент, когда география мира <span style=\"color: #ff0000;\">Survarium</span> пополнится еще одной локацией, расположенной далеко за пределами постсоветского пространства! На развалинах бывшей английской столицы развернутся отчаянные бои за выживание и превосходство. Календарь на июнь 2015 года представляет одну из областей карты \"Лондон\".</p>', '2015-05-30');
+INSERT INTO `news` VALUES ('7', 'День новичка в Survarium!', '<p>Только один день, 30 мая, в <span style=\\\"color: #ff6600;\\\">магазине Survarium</span>&nbsp;будет действовать уникальное предложение для новичков! Игроки, которые недавно познакомились с Survarium, смогут приобрести наборы экипировки с невероятной скидкой &mdash; 90%! Эти комплекты позволят быстрее освоиться и получить дополнительный комфорт в игре.</p>', '2015-05-30');
 
 -- ----------------------------
 -- Table structure for `settings`
@@ -64,7 +66,7 @@ CREATE TABLE `settings` (
 INSERT INTO `settings` VALUES ('StartPage', 'index.php');
 INSERT INTO `settings` VALUES ('theme', 'default');
 INSERT INTO `settings` VALUES ('StartLocale', 'ru');
-INSERT INTO `settings` VALUES ('CountNewsPage', '3');
+INSERT INTO `settings` VALUES ('CountNewsPage', '5');
 
 -- ----------------------------
 -- Table structure for `user`

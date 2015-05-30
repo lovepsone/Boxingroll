@@ -9,7 +9,7 @@
 		if (isset($_POST['addnews']))
 		{
 			$STH = $DBH->prepare("INSERT INTO `news`(`name`, `news`, `date`) VALUES (:n1, :n2, :d)");
-			$STH->execute(array('n1' => $_POST['NameNews'], 'n2' => $_POST['news'], 'd' => date("Y-m-d")));
+			$STH->execute(array('n1' => $_POST['NameNews'], 'n2' => stripslashes($_POST['news']), 'd' => date("Y-m-d")));
 			Redirect(ADMINS.'handle.php?cmd=addnews', true);
 		}
 		else
@@ -49,7 +49,7 @@
 		else if (isset($_POST['editnews']))
 		{
 			$STH = $DBH->prepare("UPDATE news SET name=:n1, news=:n2, date=:d WHERE id=:id");
-			$STH->execute(array('n1' => $_POST['editNameNews'], 'n2' => $_POST['news'], 'd' => date("Y-m-d"), 'id' => (int)$_POST['idEditNews']));
+			$STH->execute(array('n1' => $_POST['editNameNews'], 'n2' => stripslashes($_POST['news']), 'd' => date("Y-m-d"), 'id' => (int)$_POST['idEditNews']));
 			Redirect(ADMINS.'handle.php?cmd=editnews', true);
 		}
 		else if (isset($_POST['delnews']) && isset($_POST['id']))

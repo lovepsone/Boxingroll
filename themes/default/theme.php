@@ -59,8 +59,10 @@
 
 		echo '<table width="100%" cellpadding="0" cellspacing="0"><tr>';
 		// start box left http://codediscuss.ru/blogs/14-ajax-chat-na-php-i-mysql
-		echo '<td class="boxLeft" style="width:250px;" width="250px" align="center">';
+		echo '<td width="250px" align="center" valign="top">';
+		echo '<table cellpadding="0" cellspacing="0" width="100%" class="boxLeft">';
 		//echo '<div id="chat" data-last-id="0"></div><form id="chat-form"><textarea id="chat-msg"/></textarea><br><input type="submit" value="submit"  class="BoxButton" style="width:130px;"/></form>';
+		echo '</table>';
 		echo '</td>'; // close left
 		// start box center
 		echo '<td height="100%" align="center">';
@@ -73,7 +75,7 @@
 		echo '<tr><td colspan="5" height="100%"></td></tr></table>';
 		echo '</td>'; //close center
 		// start box right
-		echo '<td width="250px" style="width:250px;" align="left">';
+		echo '<td width="250px" align="left" valign="top">';
 		echo '<table cellpadding="0" cellspacing="0" width="100%" class="boxRight">';
 		if (ADMIN_PANEL)
 		{
