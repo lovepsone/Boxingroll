@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-05-30 13:31:50
+Date: 2015-05-31 15:22:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,13 +22,15 @@ CREATE TABLE `chat` (
   `id_msg` int(11) NOT NULL auto_increment,
   `id_user` int(11) NOT NULL default '0',
   `msg` text NOT NULL,
-  `date` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
+  `msg_date` datetime default NULL,
   PRIMARY KEY  (`id_msg`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of chat
 -- ----------------------------
+INSERT INTO `chat` VALUES ('1', '1', 'Проверка чата!', '2015-05-31 16:21:17');
+INSERT INTO `chat` VALUES ('2', '1', 'Проверка цензуры: <span style=\'color:red\'>[Цензура]</span>', '2015-05-31 16:21:35');
 
 -- ----------------------------
 -- Table structure for `news`
@@ -92,5 +94,5 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '15', '0', '0', '0', '0', '1230');
-INSERT INTO `user` VALUES ('3', '', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '10', '0', '0', '0', '0', '0');
+INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '15', '0', '0', '0', '0', '1230');
+INSERT INTO `user` VALUES ('3', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '10', '0', '0', '0', '0', '0');

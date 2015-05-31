@@ -58,10 +58,22 @@
 		echo '<table width="100%" class="MainBg" cellpadding="0" cellspacing="0"><tr><td>';
 
 		echo '<table width="100%" cellpadding="0" cellspacing="0"><tr>';
-		// start box left http://codediscuss.ru/blogs/14-ajax-chat-na-php-i-mysql
-		echo '<td width="250px" align="center" valign="top">';
+		// start box left
+		echo '<td width="250px" align="right" valign="top">';
 		echo '<table cellpadding="0" cellspacing="0" width="100%" class="boxLeft">';
-		//echo '<div id="chat" data-last-id="0"></div><form id="chat-form"><textarea id="chat-msg"/></textarea><br><input type="submit" value="submit"  class="BoxButton" style="width:130px;"/></form>';
+		echo '<tr><td colspan="2" align="right"><span class="boxLeftTitle"><b>'.$locale['chat'].'</b></span></td></tr>';
+		echo '<tr><td align="center">';
+		echo '<div id="chat"></div><br>';
+		if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+		{
+			echo '<form id="chat-form"><textarea id="chat-msg" style="width:230px;"></textarea><br><input type="submit" value="'.$locale['chat_Button'].'"  class="BoxButton" style="width:130px;"/></form>';
+		}
+		else
+		{
+			echo '<div>'.$locale['chat_non_msg'].'</div>';
+		}
+		echo '</td></tr>';
+		echo '<tr><td colspan="2" height="100%"></td></tr>';
 		echo '</table>';
 		echo '</td>'; // close left
 		// start box center
