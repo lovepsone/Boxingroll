@@ -10,20 +10,11 @@
 	$_SESSION['ERROR_REG'] = 0; $s = ''; $p = '';
 	if (isset($_POST['register']) && ($_POST['register'] == '1') && !$_SESSION['ERROR_REG'] && $_POST['kapcha'] == $_SESSION['rand_code'])
 	{
-		//nickname
-		$nickname = $_POST['mail'];
-		$position = 0;
-		for ($i = 0; $i < strlen($nickname); $i++)
-		{
-			if ($nickname[$i] == '@')
-				$position = $i;
-		}
-		$nickname = substr($nickname, 0, $position - 1);
 
 		$s = GenSalt();
 		$p = SHA1(md5($_POST['pass1']) + $s);
-		$STH = $DBH->prepare("INSERT INTO `user`(`nickname`, `mail`, `password`, `salt`, `date`) VALUES (:n, :m, :p, :s, :d)");
-		$STH->execute(array('n' => $nickname, 'm' => $_POST['mail'], 'p' => $p, 's' => $s, 'd' => date("Y-m-d")));
+		$STH = $DBH->prepare("INSERT INTO `user`(`mail`, `password`, `salt`, `date`) VALUES (:m, :p, :s, :d)");
+		$STH->execute(array('m' => $_POST['mail'], 'p' => $p, 's' => $s, 'd' => date("Y-m-d")));
 		echo '<tr><td align="center" valign="top" colspan="2"><br><hr width="60%"><br><h1>'.$locale['reg_sucess'].'</h1><hr width="60%"></td></tr>';
 
 	}
