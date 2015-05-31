@@ -20,7 +20,8 @@ td.Box a:hover {color: #ffffff;}
 .boxCenter { width: 95%; min-height: 530px; background-image: url('images/boxCenterBg.png');}
 .boxTitle {height:40px; color: #ffffd2; font-size:23px;}
 .boxRight {background-image: url('images/bg-box-right.png'); background-repeat: no-repeat; background-size: 100% 100%; border: 0px; width: 250px; height:540px;}
-.boxLeft {background-image: url('images/bg-box-left.png'); background-repeat: no-repeat; background-size: 100% 100%; border: 0px; width: 250px; height:540px;}
+.boxLeft  {background-image: url('images/bg-box-left.png');  background-repeat: no-repeat; background-size: 100% 100%; border: 0px; width: 250px; height:540px;}
+.boxLeftTitle { color:#ffffff; font-size:17px; padding: 10px;}
 .boxRightTitle { color:#ffffff; font-size:17px; padding: 10px;}
 .boxRightText { color:#0AADD2; font-size:15px; padding: 10px;}
 .boxRightValue { color:#ffffff; font-size:15px; padding: 10px;}
@@ -34,4 +35,7 @@ td.Box a:hover {color: #ffffff;}
 
 .footer {width:100%; height:84px; background-image: url('images/navbg.gif'); background-repeat: no-repeat; background-size: 100% 100%; color:#0AADD2; text-decoration: none;}
 
-#chat { height: 400px; }
+#chat { height: 430px; overflow-y: scroll; width: 230px; border: 2px solid #ffffff; border-radius: 2px;}
+.chat-bgmsg { background-image: url('images/boxCenterBg.png'); border-radius: 15px; width:90%; padding:10px 10px 10px 10px;}
+.chat-bgmsg span {color:#0AADD2;}
+#chat-msg {padding-left: 5px; }

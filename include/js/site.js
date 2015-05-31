@@ -31,73 +31,37 @@ $(document).ready(function()
 		return true;
 	});
 
-	var chat = $('#chat')[0];
-	var form = $('#chat-form')[0];
+	// чат
 	$('#chat-form').submit(function(event)
 	{
- 		var text = $(form).find('textarea');
-		$(form).find('textarea').attr("disabled", true);
-        	update(text);
+		$('#chat-msg').attr("disabled", true);
+        	update($('#chat-msg').val());
 		return false;
 	});
 
 	function update(text)
 	{
-		// что шлём
-		var send_data = { last_id: $(chat).attr('data-last-id') };
-		if (text)
-            		send_data.text = $(text).val();
-		// шлём запрос
-		$.post(
- 			'include/handle.chat.php',
-            		send_data, // отдаём скрипту данные
-            		function (data)
+		$.ajax(
+		{
+			type: "POST",
+			url: "include/handle.chat.php",
+			data: {'data': text},
+			success: function(data)
 			{
- 				// ссылка пришла?
-				if (data && $.isArray(data))
-				{
-					$(data).each(function (k)
-					{
-						// формируем наше сообщение
-						var msg = $('<div>' + data[k].created + ': ' + data[k].text + '</div>');
-						// и цепляем его к чату
-                        			$(chat).append(msg);
-						// если ласт ид меньше пришедшего
-						if (parseInt($(chat).attr('data-last-id')) < data[k].id)
-						// запоминаем новый ласт ид
-						$(chat).attr('data-last-id', data[k].id);
-					});
-                    
-                    // если это отправка, то при получении ответа, включаем форму
-                    if (text) {
-                        // включаем форму
-                        $(form).find('textarea').attr("disabled", false);
-                        // и очищаем текст
-                        $(text).val('');
-                    }
+				$('#chat').html(data);
+				$('#chat-msg').attr("disabled", false);
+				$('#chat-msg').val('');
+				$('#chat').scrollTop(chat.scrollHeight);
+			}
+		});
+	}
 
-                    // прокрутка
-                    $(chat).scrollTop(chat.scrollHeight);
-
-                    // обновим таймер 
-                    update_timer();
-                }
-            },
-            'JSON' // полученные данные рассматривать как JSON объект
-        );
-    }
-
-    // что бы при загрузке получить данные в чат, вызываем сразу апдейт
-    update();
-
-  // что бы окно чата обновлялось раз в 5 секунд, прицепим таймер
-    var timer;
-    function update_timer() {
-        if (timer) // если таймер уже был, сбрасываем
-            clearTimeout(timer);
-        timer = setTimeout(function () {
-            update();
-        }, 5000);
-    }
-    update_timer();
+	update();
+	var timer;
+	function update_timer()
+	{
+        	if (timer) clearTimeout(timer);
+		timer = setTimeout(function () { update(); }, 5000);
+	}
+    	update_timer();
 });
