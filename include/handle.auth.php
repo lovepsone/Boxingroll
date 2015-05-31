@@ -31,13 +31,4 @@
 			}
 		}
 	}
-	else if ($data[0] == "AuthLogOut")
-	{
-		unset($_SESSION['user']);
-		unset($_SESSION['id']);
-		unset($_SESSION['name']);
-		unset($_SESSION['gmlevel']);
-		unset($_SESSION['p']);
-		Redirect(BASEDIR.'index.php', true);
-	}
 ?>

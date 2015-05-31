@@ -5,12 +5,19 @@
 		Redirect(BASEDIR.'reg.php?cmd=1', true);
 	}
 
+	if (isset($_POST['AuthLogOut']))
+	{
+		unset($_SESSION['user']);
+		unset($_SESSION['id']);
+		unset($_SESSION['name']);
+		unset($_SESSION['gmlevel']);
+		unset($_SESSION['p']);
+		Redirect(BASEDIR.'index.php', true);
+	}
 	function HeadMenu()
 	{
 		global $locnav, $locale, $_SESSION;
-		/*$STH = $DBH->query("SELECT * FROM news WHERE id=(SELECT max(id) FROM news)");
-		$STH->execute();
-		$data = $STH->fetch(PDO::FETCH_ASSOC);*/
+
 		echo '<table cellpadding="0" cellspacing="0"  class="HeadBody" border="0px">';
 		echo '<tr height="89px"><td class="HeadBodyLeft">Logotips</td>';
 		echo '<td width="760px" class="HeadBodyRight" align="left">';
@@ -30,7 +37,7 @@
 			echo '<div id="UserData"><input type="button" value="'.$locale['data'].'" style="width:130px;margin-left:5px;" class="BoxButton tips"/>';
 			echo '<input type="submit" id="AddCash" value="'.$locale['b_add_cash'].'" style="width:130px;margin-left:5px; text-decoration:line-through;" class="BoxButton" />';
 			echo '<input type="submit" id="OutCash" value="'.$locale['b_out_cash'].'" style="width:130px;margin-left:5px; text-decoration:line-through;" class="BoxButton" />';
-			echo '<input type="submit" id="AuthLogOut" value="'.$locale['b_logaut'].'" style="width:130px;margin-left:5px;" class="BoxButton" /></div>';
+			echo '<input type="submit" name="AuthLogOut" value="'.$locale['b_logaut'].'" style="width:130px;margin-left:5px;" class="BoxButton" /></div>';
 			echo '</td></tr></table></form>';
 		}
 		echo '</td></tr>';
