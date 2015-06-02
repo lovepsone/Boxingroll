@@ -47,7 +47,7 @@
 		echo '<div class="headNav">';
 		echo '<a href="'.BASEDIR.'index.php">'.$locnav[1].'</a>';
 		echo '<a href="'.BASEDIR.'game.php">'.$locnav[2].'</a>';
-		echo '<a href="'.BASEDIR.'index.php">'.$locnav[3].'</a>';
+		echo '<a href="'.BASEDIR.'shop.php">'.$locnav[3].'</a>';
 		echo '<a href="'.BASEDIR.'index.php">'.$locnav[4].'</a>';
 		echo '<a href="'.BASEDIR.'index.php">'.$locnav[5].'</a>';
 		echo '</div>';
@@ -90,7 +90,7 @@
 
 	function closebox()
 	{
-		global $locale, $_SESSION, $DBH;
+		global $locale, $_SESSION, $DBH, $USER;
 		echo '<tr><td colspan="5" height="100%"></td></tr></table>';
 		echo '</td>'; //close center
 		// start box right
@@ -118,17 +118,14 @@
 			echo '<tr><td class="boxRightText">'.$locale['overallCountAddCash'].'</td><td class="boxRightValue" align="right">0</td></tr>';
 			if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
 			{
-				$STH = $DBH->query("SELECT * FROM user WHERE id=".$_SESSION['id']." AND mail='".$_SESSION['user']."' AND password='".$_SESSION['p']."'");
-				$STH->execute();
-				$data = $STH->fetch(PDO::FETCH_OBJ);
 				echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['userStats'].'</b></span></td></tr>';
 				echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
-				echo '<tr><td class="boxRightText">'.$locale['cSellBox'].'</td><td class="boxRightValue" align="right">'.$data->cSellBox.'</td></tr>';
-				echo '<tr><td class="boxRightText">'.$locale['cOpenBox'].'</td><td class="boxRightValue" align="right">'.$data->cOpenBox.'</td></tr>';
-				echo '<tr><td class="boxRightText">'.$locale['cCloseBox'].'</td><td class="boxRightValue" align="right">'.$data->cCloseBox.'</td></tr>';
-				echo '<tr><td class="boxRightText">'.$locale['CountCsh'].'</td><td class="boxRightValue" align="right">'.$data->CountCsh.'</td></tr>';
-				echo '<tr><td class="boxRightText">'.$locale['cAddCash'].'</td><td class="boxRightValue" align="right">'.$data->cAddCash.'</td></tr>';
-				echo '<tr><td class="boxRightText">'.$locale['cOutCash'].'</td><td class="boxRightValue" align="right">'.$data->cOutCash.'</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['cSellBox'].'</td><td class="boxRightValue" align="right">'.$USER->cSellBox.'</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['cOpenBox'].'</td><td class="boxRightValue" align="right">'.$USER->cOpenBox.'</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['cCloseBox'].'</td><td class="boxRightValue" align="right">'.$USER->cCloseBox.'</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['CountCsh'].'</td><td class="boxRightValue" align="right">'.$USER->CountCsh.'</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['cAddCash'].'</td><td class="boxRightValue" align="right">'.$USER->cAddCash.'</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['cOutCash'].'</td><td class="boxRightValue" align="right">'.$USER->cOutCash.'</td></tr>';
 			}
 			echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
 			if (isset($_SESSION['gmlevel']) && $_SESSION['gmlevel'] > 3 && isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))

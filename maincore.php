@@ -40,6 +40,14 @@
 	$STH->execute();
 	while($row = $STH->fetch(PDO::FETCH_ASSOC))
 		$Config[$row['setting']] = $row['value'];
+
+	$USER = null;
+	if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+	{
+		$STH = $DBH->query("SELECT * FROM user WHERE id=".$_SESSION['id']." AND mail='".$_SESSION['user']."' AND password='".$_SESSION['p']."'");
+		$STH->execute();
+		$USER = $STH->fetch(PDO::FETCH_OBJ);
+	}
 	// locale
 	if(!@include(BASEDIR.'locale/'.$Config['StartLocale'].'/locale.php'))
 		die("<b>Error:</b> can not loaded locale!!!");
