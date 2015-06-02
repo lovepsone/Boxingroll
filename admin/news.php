@@ -63,7 +63,7 @@
 			echo '<form method="post">';
 			echo '<tr><td align="center" valign="top"><hr width="60%"></td></tr>';
 			echo '<tr><td align="center" height="50px"><select name="id" class="textbox" style="width:450px">'.$editlist.'</select></td></tr>';
-			echo '<tr><td align="center" height="50px"><input type="submit" name="newsselect" value="'.$locale['AdminNewsEdit'].'" style="width:170px;" class="BoxButton" />';
+			echo '<tr><td align="center" height="50px"><input type="submit" name="newsselect" value="'.$locale['AdminNewsEdit'].'" style="width:170px;" class="BoxButton" />&nbsp;&nbsp;';
 			echo '<input type="submit" name="delnews" value="'.$locale['AdminNewsDel'].'" style="width:170px;" class="BoxButton" /></td></tr>';
 			echo '</form>';
 		}
