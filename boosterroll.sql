@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : game
+Source Server         : lllll
 Source Server Version : 50051
 Source Host           : localhost:3306
 Source Database       : boosterroll
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-05-31 15:22:28
+Date: 2015-06-02 20:41:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -69,6 +69,8 @@ INSERT INTO `settings` VALUES ('StartPage', 'index.php');
 INSERT INTO `settings` VALUES ('theme', 'default');
 INSERT INTO `settings` VALUES ('StartLocale', 'ru');
 INSERT INTO `settings` VALUES ('CountNewsPage', '5');
+INSERT INTO `settings` VALUES ('countCost', '100,300,500,1000');
+INSERT INTO `settings` VALUES ('countBox', '1,3,5,10,30');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -83,16 +85,28 @@ CREATE TABLE `user` (
   `date` date NOT NULL,
   `gmlevel` int(3) NOT NULL default '0',
   `cSellBox` int(11) NOT NULL,
+  `cSellBoxNormal` int(11) NOT NULL default '0',
+  `cSellBoxGold` int(11) NOT NULL default '0',
+  `cSellBoxPlatinum` int(11) NOT NULL default '0',
+  `cSellBoxPremium` int(11) NOT NULL default '0',
   `cOpenBox` int(11) NOT NULL default '0',
+  `cOpenBoxNormal` int(11) NOT NULL default '0',
+  `cOpenBoxGold` int(11) NOT NULL default '0',
+  `cOpenBoxPlatinum` int(11) NOT NULL default '0',
+  `cOpenBoxPremium` int(11) NOT NULL default '0',
   `cCloseBox` int(11) NOT NULL default '0',
-  `cAddCash` float NOT NULL default '0',
-  `cOutCash` float NOT NULL default '0',
-  `CountCsh` float NOT NULL default '0',
+  `cCloseBoxNormal` int(11) NOT NULL default '0',
+  `cCloseBoxGold` int(11) NOT NULL default '0',
+  `cCloseBoxPlatinum` int(11) NOT NULL default '0',
+  `cCloseBoxPremium` int(11) NOT NULL default '0',
+  `cAddCash` float(11,0) NOT NULL default '0',
+  `cOutCash` float(11,0) NOT NULL default '0',
+  `CountCsh` float(11,0) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '15', '0', '0', '0', '0', '1230');
-INSERT INTO `user` VALUES ('3', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '10', '0', '0', '0', '0', '0');
+INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '49', '1', '3', '0', '30', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1092100');
+INSERT INTO `user` VALUES ('3', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '10', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
