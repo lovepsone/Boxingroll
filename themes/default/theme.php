@@ -110,12 +110,6 @@
 		}
 		else
 		{
-			echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['overallStatsProject'].'</b></span></td></tr>';
-			echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
-			echo '<tr><td class="boxRightText">'.$locale['overallCountUser'].'</td><td class="boxRightValue" align="right">0</td></tr>';
-			echo '<tr><td class="boxRightText">'.$locale['overallCountPaidCash'].'</td><td class="boxRightValue" align="right">0</td></tr>';
-			echo '<tr><td class="boxRightText">'.$locale['overallCountGameBox'].'</td><td class="boxRightValue" align="right">0</td></tr>';
-			echo '<tr><td class="boxRightText">'.$locale['overallCountAddCash'].'</td><td class="boxRightValue" align="right">0</td></tr>';
 			if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
 			{
 				echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['userStats'].'</b></span></td></tr>';
@@ -126,6 +120,15 @@
 				echo '<tr><td class="boxRightText">'.$locale['CountCsh'].'</td><td class="boxRightValue" align="right">'.$USER->CountCsh.'</td></tr>';
 				echo '<tr><td class="boxRightText">'.$locale['cAddCash'].'</td><td class="boxRightValue" align="right">'.$USER->cAddCash.'</td></tr>';
 				echo '<tr><td class="boxRightText">'.$locale['cOutCash'].'</td><td class="boxRightValue" align="right">'.$USER->cOutCash.'</td></tr>';
+			}
+			else
+			{
+				echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['overallStatsProject'].'</b></span></td></tr>';
+				echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['overallCountUser'].'</td><td class="boxRightValue" align="right">0</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['overallCountPaidCash'].'</td><td class="boxRightValue" align="right">0</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['overallCountGameBox'].'</td><td class="boxRightValue" align="right">0</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['overallCountAddCash'].'</td><td class="boxRightValue" align="right">0</td></tr>';
 			}
 			echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
 			if (isset($_SESSION['gmlevel']) && $_SESSION['gmlevel'] > 3 && isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
