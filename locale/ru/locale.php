@@ -63,4 +63,6 @@ $locale['overallCountUser'] = 'Зарегистр. пользователей:';
 $locale['overallCountGameBox'] = 'Кол-во сыгранных ящиков:';
 $locale['overallCountPaidCash'] = 'Выплачено денежных средств:';
 $locale['overallCountAddCash'] = 'Пополнено денежных средств:';
+
+$locale['GameStart'] = 'Для открытия сундука нажмите на имеющийся у вас ключик.';
 ?>

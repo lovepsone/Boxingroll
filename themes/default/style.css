@@ -18,6 +18,7 @@ td.Box a:hover {color: #ffffff;}
 .BoxButton {height:25px; background-image: url('images/btnBG.gif'); background-color:#0F3649; border:1px; font-size:14px; border-radius:3px; color:#ffffff; cursor: pointer;}
 
 .boxCenter { width: 95%; min-height: 530px; background-image: url('images/boxCenterBg.png');}
+.boxCenterGame { width: 95%; min-height: 530px;}
 .boxTitle {height:40px; color: #ffffd2; font-size:23px;}
 .boxRight {background-image: url('images/bg-box-right.png'); background-repeat: no-repeat; background-size: 100% 100%; border: 0px; width: 250px; height:540px;}
 .boxLeft  {background-image: url('images/bg-box-left.png');  background-repeat: no-repeat; background-size: 100% 100%; border: 0px; width: 250px; height:540px;}

@@ -67,25 +67,35 @@
 		echo '<table width="100%" cellpadding="0" cellspacing="0"><tr>';
 		// start box left
 		echo '<td width="250px" align="right" valign="top">';
-		echo '<table cellpadding="0" cellspacing="0" width="100%" class="boxLeft">';
-		echo '<tr><td colspan="2" align="right"><span class="boxLeftTitle"><b>'.$locale['chat'].'</b></span></td></tr>';
-		echo '<tr><td align="center">';
-		echo '<div id="chat"></div><br>';
-		if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
-		{
-			echo '<form id="chat-form"><textarea id="chat-msg" style="width:230px;"></textarea><br><input type="submit" value="'.$locale['chat_Button'].'"  class="BoxButton" style="width:130px;"/></form>';
-		}
-		else
-		{
-			echo '<div>'.$locale['chat_non_msg'].'</div>';
-		}
-		echo '</td></tr>';
-		echo '<tr><td colspan="2" height="100%"></td></tr>';
-		echo '</table>';
+		//if (!defined("GAME_PAGE"))
+		//{
+			echo '<table cellpadding="0" cellspacing="0" width="100%" class="boxLeft">';
+			echo '<tr><td colspan="2" align="right"><span class="boxLeftTitle"><b>'.$locale['chat'].'</b></span></td></tr>';
+			echo '<tr><td align="center">';
+			echo '<div id="chat"></div><br>';
+			if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+			{
+				echo '<form id="chat-form"><textarea id="chat-msg" style="width:230px;"></textarea><br><input type="submit" value="'.$locale['chat_Button'].'"  class="BoxButton" style="width:130px;"/></form>';
+			}
+			else
+			{
+				echo '<div>'.$locale['chat_non_msg'].'</div>';
+			}
+			echo '</td></tr>';
+			echo '<tr><td colspan="2" height="100%"></td></tr>';
+			echo '</table>';
+		//}
 		echo '</td>'; // close left
 		// start box center
 		echo '<td height="100%" align="center">';
-		echo '<table cellpadding="0" cellspacing="0" height="100%" width="100%" class="boxCenter"><tr><td colspan="10" class="boxTitle" align="center"><b>'.$title.'</b></td></tr>'; //center
+		if (defined("GAME_PAGE") && GAME_PAGE)
+		{
+echo '<table cellpadding="0" cellspacing="0" height="100%" width="100%" class="boxCenterGame">';
+		}
+		else
+		{
+			echo '<table cellpadding="0" cellspacing="0" height="100%" width="100%" class="boxCenter"><tr><td colspan="10" class="boxTitle" align="center"><b>'.$title.'</b></td></tr>'; //center
+		}
 	}
 
 	function closebox()
