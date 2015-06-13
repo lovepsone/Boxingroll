@@ -96,4 +96,41 @@
 		}
 		return $res;
 	}
+
+	$ValueOpenChest = array();
+	$ValueOpenChest['value'][0] = 30;
+	$ValueOpenChest['chance'][0] = 3;
+
+	$ValueOpenChest['value'][1] = 10;
+	$ValueOpenChest['chance'][1] = 12;
+
+	$ValueOpenChest['value'][2] = 5;
+	$ValueOpenChest['chance'][2] = 25;
+
+	$ValueOpenChest['value'][3] = 1;
+	$ValueOpenChest['chance'][3] = 60;
+
+	function RoundValueOpenChest()
+	{
+		global $ValueOpenChest;
+		$tmp = array();
+		$res = 0;
+		$j = 0;
+		//calc chance
+		for ($i = 0; $i < count($ValueOpenChest['chance']); $i++)
+		{
+			if ($i > 0)
+				$ValueOpenChest['chance'][$i] = $ValueOpenChest['chance'][$i] + $ValueOpenChest['chance'][$i - 1];
+		}
+
+		for ($i = 0; $i < 100; $i++)
+		{
+			if ($i == $ValueOpenChest['chance'][$j])
+				$j++;
+			$tmp[$i] = $ValueOpenChest['value'][$j];
+		}
+		shuffle($tmp);
+		$res = $tmp[rand(0, 99)];
+		return $res;
+	}
 ?>
