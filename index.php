@@ -1,4 +1,5 @@
 <?php
+	define("GAME_PAGE", false);
 	require_once 'maincore.php';
 	require_once THEMES.'header.php';
 	HeadMenu();

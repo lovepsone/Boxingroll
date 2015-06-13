@@ -1,4 +1,5 @@
 <?php
+	define("GAME_PAGE", false);
 	require_once 'maincore.php';
 	require_once THEMES.'header.php';
 	HeadMenu();
@@ -21,26 +22,26 @@
 			}
 
 			$darr['id'] = $USER->id;
-			$darr['s1'] = $USER->cSellBox + $_POST['box'];
+			$darr['s1'] = $USER->SellKey + $_POST['box'];
 			$darr['cc'] = $USER->CountCsh - $cash;
 
 			switch($typebox)
 			{
 				case 0:
-					$darr['s2'] = $USER->cSellBoxNormal + (int)$_POST['box'];
-					$sql = "UPDATE user SET cSellBox=:s1, cSellBoxNormal=:s2, CountCsh=:cc WHERE id=:id";
+					$darr['s2'] = $USER->SellKeyNormal + (int)$_POST['box'];
+					$sql = "UPDATE user SET SellKey=:s1, SellKeyNormal=:s2, CountCsh=:cc WHERE id=:id";
 					break;
 				case 1:
-					$darr['s2'] = $USER->cSellBoxGold + (int)$_POST['box'];
-					$sql = "UPDATE user SET cSellBox=:s1, cSellBoxGold=:s2, CountCsh=:cc WHERE id=:id";
+					$darr['s2'] = $USER->SellKeyGold + (int)$_POST['box'];
+					$sql = "UPDATE user SET SellKey=:s1, SellKeyGold=:s2, CountCsh=:cc WHERE id=:id";
 					break;
 				case 2:
-					$darr['s2'] = $USER->cSellBoxPlatinum + (int)$_POST['box'];
-					$sql = "UPDATE user SET cSellBox=:s1, cSellBoxPlatinum=:s2, CountCsh=:cc WHERE id=:id";
+					$darr['s2'] = $USER->SellKeyPlatinum + (int)$_POST['box'];
+					$sql = "UPDATE user SET SellKey=:s1, SellBKeyPlatinum=:s2, CountCsh=:cc WHERE id=:id";
 					break;
 				case 3:
-					$darr['s2'] = $USER->cSellBoxPremium + (int)$_POST['box'];
-					$sql = "UPDATE user SET cSellBox=:s1, cSellBoxPremium=:s2, CountCsh=:cc WHERE id=:id";
+					$darr['s2'] = $USER->SellKeyPremium + (int)$_POST['box'];
+					$sql = "UPDATE user SET SellKey=:s1, SellKeyPremium=:s2, CountCsh=:cc WHERE id=:id";
 					break;
 			}
 			$STH = $DBH->prepare($sql);
@@ -69,10 +70,10 @@
 		{
 			$check = '';
 			if ($i == 0) $check = 'checked';
-			echo '<tr><td align="center" class="shop" height="30px"><input name="box" type="radio" value="'.$countBox[$i].'" '.$check.'>&nbsp;x'.$countBox[$i].'&nbsp;'.$locale['boxing'].'</td></tr>';
+			echo '<tr><td align="center" class="shop" height="30px"><input name="box" type="radio" value="'.$countBox[$i].'" '.$check.'>&nbsp;x'.$countBox[$i].'&nbsp;'.$locale['SellKeys'].'</td></tr>';
 	
 		}
-		echo '<tr><td align="center" class="shop" height="30px">'.$locale['cost_boxing_type'].'&nbsp;<select name="cost" class="textbox" style="width:250px">'.$listCost.'</select></td></tr>';
+		echo '<tr><td align="center" class="shop" height="30px">'.$locale['CostKeysType'].'&nbsp;<select name="cost" class="textbox" style="width:250px">'.$listCost.'</select></td></tr>';
 		if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
 		{
 			echo '<tr><td align="center" class="shop" height="30px"><input type="submit" name="BuyBox" value="'.$locale['buy'].'" style="width:170px;" class="BoxButton" /></td></tr>';
