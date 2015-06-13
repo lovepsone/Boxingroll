@@ -66,6 +66,7 @@ $locale['overallCountGameBox'] = 'Кол-во сыгранных ящиков:';
 $locale['overallCountPaidCash'] = 'Выплачено денежных средств:';
 $locale['overallCountAddCash'] = 'Пополнено денежных средств:';
 
+$locale['GameNonChat'] = 'Во время игры нельзя использовать чат.';
 $locale['GameStart'] = 'Для открытия сундука нажмите на имеющийся у вас ключик.';
 $locale['GameEnd'] = 'Чтобы закончить розыгрыш нажмите на цифру.';
 ?>
