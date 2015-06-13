@@ -124,9 +124,21 @@ echo '<table cellpadding="0" cellspacing="0" height="100%" width="100%" class="b
 			{
 				echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['userStats'].'</b></span></td></tr>';
 				echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
-				echo '<tr><td class="boxRightText">'.$locale['cSellBox'].'</td><td class="boxRightValue" align="right">'.$USER->cSellBox.'</td></tr>';
-				echo '<tr><td class="boxRightText">'.$locale['cOpenBox'].'</td><td class="boxRightValue" align="right">'.$USER->cOpenBox.'</td></tr>';
-				echo '<tr><td class="boxRightText">'.$locale['cCloseBox'].'</td><td class="boxRightValue" align="right">'.$USER->cCloseBox.'</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['cSellKey'].'</td><td class="boxRightValue" align="right">'.$USER->SellKey.'</td></tr>';
+				echo '<tr><td class="boxRightText">'.$locale['cOpenChest'].'</td><td class="boxRightValue" align="right">'.$USER->OpenChest.'</td></tr>';
+
+				echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['keys'].'</b></span></td></tr>';
+				echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
+				echo '<tr><td class="boxRightText" align="left" valing="middle">';
+				echo '&nbsp;&nbsp;<img src="'.BASEDIR.'images/key/1.png" height="25px"/> x '.$USER->SellKeyNormal;
+				echo '&nbsp;&nbsp;<img src="'.BASEDIR.'images/key/2.png" height="25px"/> x '.$USER->SellKeyGold;
+				echo '&nbsp;&nbsp;<img src="'.BASEDIR.'images/key/3.png" height="25px"/> x '.$USER->SellKeyPlatinum;
+				echo '&nbsp;&nbsp;<img src="'.BASEDIR.'images/key/4.png" height="25px"/> x '.$USER->SellKeyPremium;
+				echo '</td><td class="boxRightValue" align="left"></td></tr>';
+
+				//echo '<tr><td class="boxRightText">'.$locale['cCloseBox'].'</td><td class="boxRightValue" align="right">'.$USER->cCloseBox.'</td></tr>';
+				echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['CashInfo'].'</b></span></td></tr>';
+				echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
 				echo '<tr><td class="boxRightText">'.$locale['CountCsh'].'</td><td class="boxRightValue" align="right">'.$USER->CountCsh.'</td></tr>';
 				echo '<tr><td class="boxRightText">'.$locale['cAddCash'].'</td><td class="boxRightValue" align="right">'.$USER->cAddCash.'</td></tr>';
 				echo '<tr><td class="boxRightText">'.$locale['cOutCash'].'</td><td class="boxRightValue" align="right">'.$USER->cOutCash.'</td></tr>';

@@ -51,12 +51,14 @@ $locale['b_out_cash'] = 'Вывод средств';
 $locale['b_logaut'] = 'Выход';
 
 $locale['userStats'] = 'Ваша статистика';
-$locale['cSellBox'] = 'Кол-во купленных ящиков';
-$locale['cOpenBox'] = 'Кол-во открытых ящиков:';
+$locale['cSellKey'] = 'Кол-во купленных ключей:';
+$locale['cOpenChest'] = 'Кол-во открытых сундуков:';
+$locale['keys'] = 'Текущие ключи';
+$locale['CashInfo'] = 'Денежные средства';
 $locale['cCloseBox'] = 'Кол-во мнимых ящиков:';
 $locale['cAddCash'] = 'Кол-во введенных средств:';
 $locale['cOutCash'] = 'Кол-во выведенных средств:';
-$locale['CountCsh'] = 'Ваш баланс счета:';
+$locale['CountCsh'] = 'Состояние счета:';
 
 $locale['overallStatsProject'] = 'Общая статистика проекта';
 $locale['overallCountUser'] = 'Зарегистр. пользователей:';

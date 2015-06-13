@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : lllll
+Source Server         : game
 Source Server Version : 50051
 Source Host           : localhost:3306
 Source Database       : boosterroll
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-06-02 20:41:07
+Date: 2015-06-13 14:26:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -84,12 +84,12 @@ CREATE TABLE `user` (
   `salt` varchar(10) collate utf8_unicode_ci NOT NULL,
   `date` date NOT NULL,
   `gmlevel` int(3) NOT NULL default '0',
-  `cSellBox` int(11) NOT NULL,
-  `cSellBoxNormal` int(11) NOT NULL default '0',
-  `cSellBoxGold` int(11) NOT NULL default '0',
-  `cSellBoxPlatinum` int(11) NOT NULL default '0',
-  `cSellBoxPremium` int(11) NOT NULL default '0',
-  `cOpenBox` int(11) NOT NULL default '0',
+  `SellKey` int(11) NOT NULL,
+  `SellKeyNormal` int(11) NOT NULL default '0',
+  `SellKeyGold` int(11) NOT NULL default '0',
+  `SellKeyPlatinum` int(11) NOT NULL default '0',
+  `SellKeyPremium` int(11) NOT NULL default '0',
+  `OpenChest` int(11) NOT NULL default '0',
   `cOpenBoxNormal` int(11) NOT NULL default '0',
   `cOpenBoxGold` int(11) NOT NULL default '0',
   `cOpenBoxPlatinum` int(11) NOT NULL default '0',
@@ -108,5 +108,5 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '49', '1', '3', '0', '30', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1092100');
-INSERT INTO `user` VALUES ('3', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '10', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '49', '1', '3', '5', '30', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '10000');
+INSERT INTO `user` VALUES ('3', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '10', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '10000');
