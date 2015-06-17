@@ -16,18 +16,17 @@
 	var camera, scene, renderer, clock;
 	var raycaster;
 	var mouse, MoseClick = true, MoseClickReturn = false, addRondValue = true;
-	var debug = true;
 	var mesh, texture, MeshRoundValue;
 	var SCREEN_WIDTH = window.innerWidth - 600;
 	var SCREEN_HEIGHT = 500;
-	var GroupChest, GroupKey, GroupText, GroupPlane;
+	var GroupChest, GroupKey, GroupText, GroupPlane, GroupKopeck;
 	var animDestruction = false, animDestructionReturn = false;
-	var pos_z_key = 180, pos_xy_key = 180, VisibleKey, RotateKeys = true, animKeyStart = false, animKeyRotateVisible = false;
+	var VisibleKey, RotateKeys = true, animKeyStart = false, animKeyRotateVisible = false;
 	var animCameraStart = false, animCameraPositionStart = false, animCamera = 1.5, animTimerCamera = 0.00;
 	var emitter, particleGroup, startAnimParticle = false;
 	var DataUser, TypeKey = '{ "Normal":0, "Gold":1, "Platinum":2, "Premium":3}';
 
-	var LoaderLogic = true, LoaderChest = false, LoaderKeys = false, LoaderPlanes = false, LoaderEnd = false;
+	var LoaderLogic = true, LoaderChest = false, LoaderKeys = false, LoaderPlanes = false, LoaderKopecks = false, LoaderEnd = false;
 
 	var txtGameStart = '<span id="game-msg" style="position:absolute; left:370px; top:220px;"><?php echo $locale['GameStart']; ?></span>';
 	var txtGameLoad = '<span id="game-msg-loader" style="font-size:23px;position:absolute; left:' + (280 + SCREEN_WIDTH/2) + 'px; top:' + (180 + SCREEN_HEIGHT/2) + 'px;">Loading...</span>';
@@ -57,11 +56,13 @@
 		GroupKey = new THREE.Group();
 		GroupPlane = new THREE.Group();
 		GroupText = new THREE.Group();
+		GroupKopeck = new THREE.Group();
 
 		GroupChest.visible = false;
 		GroupKey.visible = false;
 		GroupPlane.visible = false;
 		GroupText.visible = false;
+		//GroupKopeck.visible = false;
 
 		document.addEventListener('mousedown', onDocumentMouseDown, false);
 		document.addEventListener('mousemove', onDocumentMouseMove, false);
@@ -132,6 +133,15 @@
 				plane.name = data['plane'][i]['name'];
 				GroupPlane.add(plane);
 			}
+			if (i < data['kopeck'].length)
+			{
+				loader.load(data['kopeck'][i]['model'], function(geometry, materials)
+				{
+					var material = new THREE.MeshFaceMaterial(materials);
+					mesh = new THREE.Mesh(geometry, material);
+			        	GroupKopeck.add(mesh);
+				});
+			}
 		}
 		loader.onLoadComplete = function()
 		{
@@ -140,14 +150,27 @@
 				StartConfigChest(data);
 			if (GroupKey.children.length == data['keys'].length)
 				StartConfigKeys(data);
-			if (GroupChest.children.length == data['chest'].length && GroupKey.children.length == data['keys'].length)
+			if (GroupKopeck.children.length == data['kopeck'].length)
 			{
-				if (LoaderChest && LoaderKeys && LoaderPlanes)
+				for (var i = 0; i < GroupKopeck.children.length; i++)
+				{
+					GroupKopeck.children[i].name = data['kopeck'][i]['name'];
+					GroupKopeck.children[i].scale.set(data['kopeck'][i]['scale'][0], data['kopeck'][i]['scale'][1], data['kopeck'][i]['scale'][2]);
+					GroupKopeck.children[i].position.set(data['kopeck'][i]['position'][0], data['kopeck'][i]['position'][1], data['kopeck'][i]['position'][2]);
+					GroupKopeck.children[i].rotation.set(1.57, 0, 0);
+					GroupKopeck.children[i].visible = false;
+				}
+				LoaderKopecks = true;
+			}
+			if (GroupChest.children.length == data['chest'].length && GroupKey.children.length == data['keys'].length && GroupKopeck.children.length == data['kopeck'].length)
+			{
+				if (LoaderChest && LoaderKeys && LoaderPlanes && LoaderKopecks)
 				{
 					GroupChest.visible = true;
 					GroupKey.visible = true;
 					GroupPlane.visible = true;
 					GroupText.visible = true;
+					//GroupKopeck.visible = true;
 					LoaderEnd = true;
 					$("#game-msg-loader").remove();
 					$("#BoxingRollGame").append(txtGameStart);
@@ -158,6 +181,7 @@
 		scene.add(GroupChest);
 		scene.add(GroupKey);
 		scene.add(GroupPlane);
+		scene.add(GroupKopeck);
 	}
 
 	function LoadStartText(data)
@@ -203,13 +227,14 @@
 		if (addRondValue)
 		{
 			addRondValue = false;
-			var text3d = new THREE.TextGeometry(<?php echo RoundValueOpenChest(); ?>, {size: 110, height: 20, curveSegments: 2, font: "helvetiker"});
+			var text3d = new THREE.TextGeometry("x" + <?php echo RoundValueOpenChest(); ?>, {size: 100, height: 20, curveSegments: 2, font: "helvetiker"});
 			text3d.computeBoundingBox();
 			var textMaterial = new THREE.MeshBasicMaterial({color: 0x0aadd2, overdraw: 0.5});
 			MeshRoundValue = new THREE.Mesh(text3d, textMaterial);
 			MeshRoundValue.name = "RoundValue";
-			MeshRoundValue.position.set(-30, 0, 40);
+			MeshRoundValue.position.set(-30, 10, 40);
 			scene.add(MeshRoundValue);
+			GroupKopeck.children[VisibleKey].visible = true;
 		}
 	}
 	function getTypeKey(name_key)
@@ -287,6 +312,7 @@
 		}
 		if (MoseClickReturn)
 		{
+			GroupKopeck.children[VisibleKey].visible = false;
 			scene.remove(MeshRoundValue);
 			$("#game-msg").remove();
 			animCameraStart = false;

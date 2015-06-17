@@ -117,5 +117,33 @@
 		  "size": 40,
 		  "height": 5,
 		  "position": [210, -170, 180]
+		}],
+	"kopeck": [{
+		  "id": 0,
+		  "name": "kopeckNormal",
+		  "model": "game/kopeck/kopeckNormal.js",
+		  "scale": [50, 50, 50],
+		  "position": [-90, 50, 60]
+		},
+		{
+		  "id": 1,
+		  "name": "kopeckGold",
+		  "model": "game/kopeck/kopeckGold.js",
+		  "scale": [50, 50, 50],
+		  "position": [-90, 50, 60]
+		},
+		{
+		  "id": 2,
+		  "name": "kopeckPlatinum",
+		  "model": "game/kopeck/kopeckPlatinum.js",
+		  "scale": [50, 50, 50],
+		  "position": [-90, 50, 60]
+		},
+		{
+		  "id": 3,
+		  "name": "kopeckPremium",
+		  "model": "game/kopeck/kopeckPremium.js",
+		  "scale": [50, 50, 50],
+		  "position": [-90, 50, 60]
 		}]
 }
