@@ -68,33 +68,13 @@
 	}
 
 	// functions
-	// 1-Normal\2-Gold\3-Platinum\4-Premium
-	function getCountKey($type = 1)
+	function getCountKey()
 	{
 		global $DBH, $_SESSION;
 		$STH = $DBH->query("SELECT SellKeyNormal, SellKeyGold, SellKeyPlatinum, SellKeyPremium FROM user WHERE id=".$_SESSION['id']." AND mail='".$_SESSION['user']."' AND password='".$_SESSION['p']."'");
 		$STH->execute();
-		$res = null;
 		$row = $STH->fetch(PDO::FETCH_OBJ);
-		switch ($type)
-		{
-		  case 1:
-		    $res = $row->SellKeyNormal;
-		    break;
-		  case 2:
-		    $res = $row->SellKeyGold;
-		    break;
-		  case 3:
-		    $res = $row->SellKeyPlatinum;
-		    break;
-		  case 4:
-		    $res = $row-> SellKeyPremium;
-		    break;
-		  default:
-		    $res = $row->SellKeyNormal;
-		    break;
-		}
-		return $res;
+		return '['.$row->SellKeyNormal.', '.$row->SellKeyGold.', '.$row->SellKeyPlatinum.', '.$row-> SellKeyPremium.']';
 	}
 
 	$ValueOpenChest = array();
@@ -132,5 +112,11 @@
 		shuffle($tmp);
 		$res = $tmp[rand(0, 99)];
 		return $res;
+	}
+
+	function AddOpenChest($value)
+	{
+		global $DBH, $_SESSION;
+
 	}
 ?>
