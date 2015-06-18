@@ -114,9 +114,10 @@
 		return $res;
 	}
 
-	function AddOpenChest($value)
+	function DBH_AddOpenChest()
 	{
 		global $DBH, $_SESSION;
-
+		$STH = $DBH->prepare("UPDATE `user` SET `OpenChest`=OpenChest+1 WHERE id=:i AND mail=:m AND password=:p");
+		$STH->execute(array('i' => $_SESSION['id'], 'm' => $_SESSION['user'], 'p' => $_SESSION['p']));
 	}
 ?>
