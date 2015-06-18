@@ -114,6 +114,31 @@
 		return $res;
 	}
 
+	function DBH_AddRoundValue($str)
+	{
+		global $DBH, $_SESSION;
+		$row = "";
+
+		list($type, $value) = explode(",", $str);
+		switch ((int)$type)
+		{
+		  case 0:
+		    $row = "`KopeckNormal`=KopeckNormal+".$value;
+		    break;
+		  case 1:
+		    $row = "`KopeckGold`=KopeckGold+".$value;
+		  case 2:
+		    $row = "`KopeckPlatinum`=KopeckPlatinum+".$value;
+		    break;
+		  case 3:
+		    $row = "`KopeckPremium`=KopeckPremium+".$value;
+		    break;
+		}
+
+		$STH = $DBH->prepare("UPDATE `user` SET `Kopeck`=Kopeck+".$value.", ".$row." WHERE id=:i AND mail=:m AND password=:p");
+		$STH->execute(array('i' => $_SESSION['id'], 'm' => $_SESSION['user'], 'p' => $_SESSION['p']));
+	}
+
 	function DBH_AddOpenChest()
 	{
 		global $DBH, $_SESSION;

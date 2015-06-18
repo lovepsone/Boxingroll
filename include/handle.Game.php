@@ -17,6 +17,12 @@
 		  case 'getCountKey':
 		    $result = getCountKey();
 		    break;
+		  case 'RoundValueOpenChest':
+		    $result = RoundValueOpenChest();
+		    break;
+		  case 'DBH_AddRoundValue':
+		    DBH_AddRoundValue($value);
+		    break;
 		}
 		echo $result;
 	}

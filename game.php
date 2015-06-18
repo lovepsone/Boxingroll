@@ -235,13 +235,23 @@
 		if (addRondValue)
 		{
 			addRondValue = false;
-			var text3d = new THREE.TextGeometry("x" + <?php echo RoundValueOpenChest(); ?>, {size: 100, height: 20, curveSegments: 2, font: "helvetiker"});
-			text3d.computeBoundingBox();
-			var textMaterial = new THREE.MeshBasicMaterial({color: 0x0aadd2, overdraw: 0.5});
-			MeshRoundValue = new THREE.Mesh(text3d, textMaterial);
-			MeshRoundValue.name = "RoundValue";
-			MeshRoundValue.position.set(-30, 10, 40);
-			scene.add(MeshRoundValue);
+			$.ajax(
+			{
+				type: "POST",
+				url: "include/handle.Game.php",
+				data: {'data': 'RoundValueOpenChest:0'},
+				success: function(RandValue)
+				{
+					var text3d = new THREE.TextGeometry("x" + RandValue, {size: 100, height: 20, curveSegments: 2, font: "helvetiker"});
+					text3d.computeBoundingBox();
+					var textMaterial = new THREE.MeshBasicMaterial({color: 0x0aadd2, overdraw: 0.5});
+					MeshRoundValue = new THREE.Mesh(text3d, textMaterial);
+					MeshRoundValue.name = "RoundValue";
+					MeshRoundValue.position.set(-30, 10, 40);
+					scene.add(MeshRoundValue);
+					DBH_AddRoundValue(VisibleKey + ',' + RandValue);
+				}
+			});
 			GroupKopeck.children[VisibleKey].visible = true;
 		}
 	}
@@ -479,6 +489,11 @@
 	function DBH_DeleteKey(typeKey)
 	{
 		$.ajax({ type: "POST", url: "include/handle.Game.php", data: {'data': 'DBH_DeleteKey:'+typeKey} });
+	}
+
+	function DBH_AddRoundValue(str)
+	{
+		$.ajax({ type: "POST", url: "include/handle.Game.php", data: {'data': 'DBH_AddRoundValue:'+str} });
 	}
 <?php
 
