@@ -51,9 +51,11 @@ $locale['b_out_cash'] = 'Вывод средств';
 $locale['b_logaut'] = 'Выход';
 
 $locale['userStats'] = 'Ваша статистика';
-$locale['cSellKey'] = 'Кол-во купленных ключей:';
+$locale['cSellKey'] = 'Кол-во ключей:';
+$locale['cKopeck'] = 'Кол-во жетонов:';
 $locale['cOpenChest'] = 'Кол-во открытых сундуков:';
 $locale['keys'] = 'Текущие ключи';
+$locale['kopecks'] = 'Текущие жетоны';
 $locale['CashInfo'] = 'Денежные средства';
 $locale['cCloseBox'] = 'Кол-во мнимых ящиков:';
 $locale['cAddCash'] = 'Кол-во введенных средств:';
