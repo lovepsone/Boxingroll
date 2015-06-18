@@ -24,7 +24,7 @@
 	var VisibleKey, RotateKeys = true, animKeyStart = false, animKeyRotateVisible = false;
 	var animCameraStart = false, animCameraPositionStart = false, animCamera = 1.5, animTimerCamera = 0.00;
 	var emitter, particleGroup, startAnimParticle = false;
-	var DataUser, TypeKey = '{ "Normal":0, "Gold":1, "Platinum":2, "Premium":3}';
+	var TypeKey = '{ "Normal":0, "Gold":1, "Platinum":2, "Premium":3}';
 
 	var LoaderLogic = true, LoaderChest = false, LoaderKeys = false, LoaderPlanes = false, LoaderKopecks = false, LoaderEnd = false;
 
@@ -55,14 +55,11 @@
 		GroupChest = new THREE.Group();
 		GroupKey = new THREE.Group();
 		GroupPlane = new THREE.Group();
-		GroupText = new THREE.Group();
 		GroupKopeck = new THREE.Group();
 
 		GroupChest.visible = false;
 		GroupKey.visible = false;
 		GroupPlane.visible = false;
-		GroupText.visible = false;
-		//GroupKopeck.visible = false;
 
 		document.addEventListener('mousedown', onDocumentMouseDown, false);
 		document.addEventListener('mousemove', onDocumentMouseMove, false);
@@ -186,17 +183,28 @@
 
 	function LoadStartText(data)
 	{
-		DataUser = <?php echo getCountKey(); ?>;
-		for (var i = 0; i < data['text'].length; i++)
+		GroupText = new THREE.Group();
+		if (!LoaderEnd) GroupText.visible = false;
+		$.ajax(
 		{
-			var text3d = new THREE.TextGeometry("x " + DataUser[i], {size: data['text'][i]['size'], height: data['text'][i]['height'], curveSegments: 2, font: "helvetiker"});
-			text3d.computeBoundingBox();
-			mesh = new THREE.Mesh(text3d, new THREE.MeshBasicMaterial({color: 0x0aadd2, overdraw: 0.5}));
-			mesh.position.set(data['text'][i]['position'][0], data['text'][i]['position'][1], data['text'][i]['position'][2]);
-			mesh.name = data['text'][i]['name'];
-			GroupText.add(mesh);	
-		}
-		scene.add(GroupText);
+			type: "POST",
+			url: "include/handle.Game.php",
+			data: {'data': 'getCountKey:0'},
+			success: function(DataUser)
+			{
+				for (var i = 0; i < data['text'].length; i++)
+				{
+					var tmp = JSON.parse(DataUser);
+					var text3d = new THREE.TextGeometry("x " + tmp[i], {size: data['text'][i]['size'], height: data['text'][i]['height'], curveSegments: 2, font: "helvetiker"});
+					text3d.computeBoundingBox();
+					mesh = new THREE.Mesh(text3d, new THREE.MeshBasicMaterial({color: 0x0aadd2, overdraw: 0.5}));
+					mesh.position.set(data['text'][i]['position'][0], data['text'][i]['position'][1], data['text'][i]['position'][2]);
+					mesh.name = data['text'][i]['name'];
+					GroupText.add(mesh);	
+				}
+				scene.add(GroupText);
+			}
+		});
 	}
 
 	function StartConfigChest(data)
