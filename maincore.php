@@ -120,4 +120,28 @@
 		$STH = $DBH->prepare("UPDATE `user` SET `OpenChest`=OpenChest+1 WHERE id=:i AND mail=:m AND password=:p");
 		$STH->execute(array('i' => $_SESSION['id'], 'm' => $_SESSION['user'], 'p' => $_SESSION['p']));
 	}
+
+	function DBH_DeleteKey($keys)
+	{
+		global $DBH, $_SESSION;
+		$row = "";
+
+		switch ($keys)
+		{
+		  case 0:
+		    $row = "`SellKeyNormal`=SellKeyNormal-1";
+		    break;
+		  case 1:
+		    $row = "`SellKeyGold`=SellKeyGold-1";
+		  case 2:
+		    $row = "`SellKeyPlatinum`=SellKeyPlatinum-1";
+		    break;
+		  case 3:
+		    $row = "`SellKeyPremium`=SellKeyPremium-1";
+		    break;
+		}
+
+		$STH = $DBH->prepare("UPDATE `user` SET `SellKey`=SellKey-1, ".$row." WHERE id=:i AND mail=:m AND password=:p");
+		$STH->execute(array('i' => $_SESSION['id'], 'm' => $_SESSION['user'], 'p' => $_SESSION['p']));
+	}
 ?>

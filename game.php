@@ -296,6 +296,7 @@
 			{
 				VisibleKey = getTypeKey(intersects[0].object.name);
 				DBH_AddOpenChest();
+				DBH_DeleteKey(VisibleKey);
 				new TWEEN.Tween(GroupKey.children[VisibleKey].position).to({x: 0, y: 90, z: 150}, 2000 ).easing(TWEEN.Easing.Elastic.Out).start();
 				new TWEEN.Tween(GroupKey.children[VisibleKey].rotation).to({x: 1.64, y: 0, z: 0}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
 				animCameraStart = true;
@@ -465,6 +466,11 @@
 	function DBH_AddOpenChest()
 	{
 		$.ajax({ type: "POST", url: "include/handle.Game.php", data: {'data': 'DBH_AddOpenChest:0'} });
+	}
+
+	function DBH_DeleteKey(typeKey)
+	{
+		$.ajax({ type: "POST", url: "include/handle.Game.php", data: {'data': 'DBH_DeleteKey:'+typeKey} });
 	}
 <?php
 
