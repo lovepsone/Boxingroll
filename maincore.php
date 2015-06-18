@@ -78,17 +78,20 @@
 	}
 
 	$ValueOpenChest = array();
-	$ValueOpenChest['value'][0] = 30;
-	$ValueOpenChest['chance'][0] = 3;
+	$ValueOpenChest['value'][0] = 50;
+	$ValueOpenChest['chance'][0] = 1;
 
-	$ValueOpenChest['value'][1] = 10;
-	$ValueOpenChest['chance'][1] = 12;
+	$ValueOpenChest['value'][1] = 20;
+	$ValueOpenChest['chance'][1] = 2;
 
-	$ValueOpenChest['value'][2] = 5;
-	$ValueOpenChest['chance'][2] = 25;
+	$ValueOpenChest['value'][2] = 10;
+	$ValueOpenChest['chance'][2] = 3;
 
-	$ValueOpenChest['value'][3] = 1;
-	$ValueOpenChest['chance'][3] = 60;
+	$ValueOpenChest['value'][3] = 5;
+	$ValueOpenChest['chance'][3] = 4;
+
+	$ValueOpenChest['value'][4] = 1;
+	$ValueOpenChest['chance'][4] = 90;
 
 	function RoundValueOpenChest()
 	{
