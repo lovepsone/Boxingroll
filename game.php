@@ -31,6 +31,7 @@
 	var txtGameStart = '<span id="game-msg" style="position:absolute; left:370px; top:220px;"><?php echo $locale['GameStart']; ?></span>';
 	var txtGameLoad = '<span id="game-msg-loader" style="font-size:23px;position:absolute; left:' + (280 + SCREEN_WIDTH/2) + 'px; top:' + (180 + SCREEN_HEIGHT/2) + 'px;">Loading...</span>';
 	var txtGameEnd = '<span id="game-msg" style="position:absolute; left:370px; top:220px;"><?php echo $locale['GameEnd']; ?> </span>';
+	GameUpdateUser();
 	init();
         initParticles();
         setTimeout(animate, 0);
@@ -484,16 +485,33 @@
 	function DBH_AddOpenChest()
 	{
 		$.ajax({ type: "POST", url: "include/handle.Game.php", data: {'data': 'DBH_AddOpenChest:0'} });
+		GameUpdateUser();
 	}
 
 	function DBH_DeleteKey(typeKey)
 	{
 		$.ajax({ type: "POST", url: "include/handle.Game.php", data: {'data': 'DBH_DeleteKey:'+typeKey} });
+		GameUpdateUser();
 	}
 
 	function DBH_AddRoundValue(str)
 	{
 		$.ajax({ type: "POST", url: "include/handle.Game.php", data: {'data': 'DBH_AddRoundValue:'+str} });
+		GameUpdateUser();
+	}
+
+	function GameUpdateUser()
+	{
+		$.ajax(
+		{
+			type: "POST",
+			url: "include/handle.Game.php",
+			data: {'data': 'GameUpdateUser:0'},
+			success: function(data)
+			{
+				$("#GameUpdateUser").html(data);
+			}
+		});
 	}
 <?php
 
