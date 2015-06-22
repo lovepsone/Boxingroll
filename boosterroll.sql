@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-06-22 18:59:10
+Date: 2015-06-22 20:57:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -70,7 +70,10 @@ INSERT INTO `settings` VALUES ('theme', 'default');
 INSERT INTO `settings` VALUES ('StartLocale', 'ru');
 INSERT INTO `settings` VALUES ('CountNewsPage', '5');
 INSERT INTO `settings` VALUES ('TypeKeyCash', '1:100,2:300,3:500,4:1000');
-INSERT INTO `settings` VALUES ('countBox', '1,3,5,10,30');
+INSERT INTO `settings` VALUES ('CostLabelPirate1', '250');
+INSERT INTO `settings` VALUES ('CountLabelPirate1', '30');
+INSERT INTO `settings` VALUES ('CountLabelPirate2', '30');
+INSERT INTO `settings` VALUES ('CostLabelPirate2', '1500');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -102,11 +105,12 @@ CREATE TABLE `user` (
   `cAddCash` float(11,0) NOT NULL default '0',
   `cOutCash` float(11,0) NOT NULL default '0',
   `CountCsh` float(11,0) NOT NULL default '0',
+  `LabelPirate` int(11) unsigned zerofill NOT NULL default '00000000000',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '100000');
-INSERT INTO `user` VALUES ('3', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '100000');
+INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '100000', '00000000030');
+INSERT INTO `user` VALUES ('3', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '100000', '00000000030');

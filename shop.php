@@ -5,9 +5,12 @@
 	HeadMenu();
 	openbox($locnav[3]);
 
-	$countBox = explode(",", $Config['countBox']);
-
 	$DataKey = array();
+	$DataLable = array(
+	0 => array('img' => 'images/label/1.png', 'locale' => $locLabel[0], 'cost' => $Config['CostLabelPirate1']),
+	1 => array('img' => 'images/label/2.png', 'locale' => $locLabel[1], 'cost' => $Config['CostLabelPirate2'])
+	);
+
 	$TypeKeyCash = explode(",", $Config['TypeKeyCash']);
 	for ($i = 0; $i < count($TypeKeyCash); $i++)
 	{
@@ -15,7 +18,7 @@
 		$DataKey[$i] = array('id' => $tmp[0], 'cost' => $tmp[1]);
 	}
 
-	if (isset($_POST['BuyKey']) && isset($_POST['CountBuyKey']) && (int)$_POST['CountBuyKey'] > 0)
+	if (isset($_POST['BuyKey']) && isset($_POST['CountBuyKey']) && (int)$_POST['CountBuyKey'] > 0 && isset($_POST['BuyKey']))
 	{
 		// проверка кеша
 		$CountBuyKey = (int)$_POST['CountBuyKey'];
@@ -59,11 +62,14 @@
 		}
 		
 	}
+	else if (isset($_POST['BuyLable']))
+	{
+		echo 'sucessful';
+	}
 	else
 	{
 		echo '<form method="post">';
 		echo '<tr><td align="center" colspan="10" valign="top"><hr size="2"></td></tr>';
-	
 	
 		for ($i = 0; $i < count($DataKey); $i++)
 		{
@@ -86,6 +92,25 @@
 			echo '<tr><td colspan="5" align="center" height="30px"><span class="shop-msg">'.$locale['shop_msg_auth'].'</span></td></tr>';
 		}
 
+		echo '<tr><td align="center" colspan="10" height="30px"><hr size="2"></td></tr>';
+
+		for ($i = 0; $i < count($DataLable); $i++)
+		{
+			$check = '';
+			if ($i == 0) $check = 'checked';
+			echo '<tr height="100px"><td align="center" class="shop" width="60px"><img src="'.BASEDIR.$DataLable[$i]['img'].'" height="35px"/><td>';
+			echo '<td align="left" class="shop">'.$DataLable[$i]['locale'].'</td>';
+			echo '<td align="center" class="shop" width="160px">'.$locale['CostKey'].'&nbsp;&nbsp;'.$DataLable[$i]['cost'].'&nbsp;p.</td>';
+			echo '<td align="center" class="shop" width="60px"><input name="lables" type="radio" value="'.$i.'" '.$check.'>&nbsp;</td></tr>';
+		}
+		if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+		{
+			echo '<tr><td colspan="5" align="center" class="shop" height="30px"><input type="submit" name="BuyLable" value="'.$locale['buy'].'" style="width:170px;" class="BoxButton" /></td></tr>';
+		}
+		else
+		{
+			echo '<tr><td colspan="5" align="center" height="30px"><span class="shop-msg">'.$locale['shop_msg_auth'].'</span></td></tr>';
+		}
 		echo '</form>';
 	}
 	closebox();
