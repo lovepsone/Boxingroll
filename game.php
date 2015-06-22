@@ -13,20 +13,18 @@
 	echo '<tr><td><div id="BoxingRollGame" align="center"></div><script>';
 ?>
 
-	var camera, scene, renderer, clock;
+	var camera, scene, renderer, clock, debug = true, flagTimeout = false;;
 	var raycaster;
 	var mouse, MoseClick = true, MoseClickReturn = false, addRondValue = true;
 	var mesh, texture, MeshRoundValue;
-	var SCREEN_WIDTH = window.innerWidth - 600;
-	var SCREEN_HEIGHT = 500;
+	var SCREEN_WIDTH = window.innerWidth - 600, SCREEN_HEIGHT = 500;
 	var GroupChest, GroupKey, GroupText, GroupPlane, GroupKopeck;
 	var animDestruction = false, animDestructionReturn = false;
 	var VisibleKey, RotateKeys = true, animKeyStart = false, animKeyRotateVisible = false;
 	var animCameraStart = false, animCameraPositionStart = false, animCamera = 1.5, animTimerCamera = 0.00;
 	var emitter, particleGroup, startAnimParticle = false;
-	var TypeKey = '{ "Normal":0, "Gold":1, "Platinum":2, "Premium":3}';
 
-	var LoaderLogic = true, LoaderChest = false, LoaderKeys = false, LoaderPlanes = false, LoaderKopecks = false, LoaderEnd = false;
+	var DataGame, LoaderEnd = false, UserGame;
 
 	var txtGameStart = '<span id="game-msg" style="position:absolute; left:370px; top:220px;"><?php echo $locale['GameStart']; ?></span>';
 	var txtGameLoad = '<span id="game-msg-loader" style="font-size:23px;position:absolute; left:' + (280 + SCREEN_WIDTH/2) + 'px; top:' + (180 + SCREEN_HEIGHT/2) + 'px;">Loading...</span>';
@@ -36,7 +34,9 @@
         initParticles();
         setTimeout(animate, 0);
 
-	$(window).load(function(){if (LoaderLogic) $.getJSON('game/GameData.js', function(result){LoaderLogic = false; LoadScene(result);});});
+	$(window).load(function(){$.getJSON('game/GameData.js', function(result){DataGame = result; LoadScene(result);});});
+
+//function wait() {if(!flagTimeout) setTimeout('wait()',100); else return;}
 
 	function init()
 	{
@@ -48,6 +48,8 @@
 		$("#BoxingRollGame").append(txtGameLoad);
 		camera = new THREE.PerspectiveCamera(100, renderer.domElement.offsetWidth / renderer.domElement.offsetHeight, 1, 600);
 		camera.position.z = 500;
+
+		if (debug) console.log('[DEBUG]: render [PixelRatio:%s] [offset(W/H):%s/%s]', window.devicePixelRatio, renderer.domElement.offsetWidth, renderer.domElement.offsetHeight);
 
 		scene = new THREE.Scene();
 		raycaster = new THREE.Raycaster();
@@ -101,7 +103,7 @@
 	function LoadScene(data)
 	{
 		var loader = new THREE.JSONLoader();
-
+		LoaderChest = false, LoaderKeys = false, LoaderPlanes = false, LoaderKopecks = false;
 		for (var i = 0; i < data['chest'].length; i++)
 		{
 			if (i < data['chest'].length)
@@ -175,6 +177,7 @@
 				}
 			}
 		};
+		if (debug) console.log('[DEBUG][LOADER]:\n', GroupChest, GroupKey, GroupPlane, GroupKopeck);
 		LoadStartText(data);
 		scene.add(GroupChest);
 		scene.add(GroupKey);
@@ -195,8 +198,8 @@
 			{
 				for (var i = 0; i < data['text'].length; i++)
 				{
-					var tmp = JSON.parse(DataUser);
-					var text3d = new THREE.TextGeometry("x " + tmp[i], {size: data['text'][i]['size'], height: data['text'][i]['height'], curveSegments: 2, font: "helvetiker"});
+					UserGame = JSON.parse(DataUser);
+					var text3d = new THREE.TextGeometry("x " + UserGame[i], {size: data['text'][i]['size'], height: data['text'][i]['height'], curveSegments: 2, font: "helvetiker"});
 					text3d.computeBoundingBox();
 					mesh = new THREE.Mesh(text3d, new THREE.MeshBasicMaterial({color: 0x0aadd2, overdraw: 0.5}));
 					mesh.position.set(data['text'][i]['position'][0], data['text'][i]['position'][1], data['text'][i]['position'][2]);
@@ -314,8 +317,16 @@
 			if (intersects.length > 0 && (intersects[0].object.name == "Normal" || intersects[0].object.name == "Gold" || intersects[0].object.name == "Platinum" || intersects[0].object.name == "Premium"))
 			{
 				VisibleKey = getTypeKey(intersects[0].object.name);
+
+				if (UserGame[VisibleKey] <= 0)
+				{
+					return;
+				}
+
 				DBH_AddOpenChest();
 				DBH_DeleteKey(VisibleKey);
+				if (debug) console.log('[DEBUG]: onDocumentMouseDown [objectname:%s] [TypeKey:%s]', intersects[0].object.name, VisibleKey);
+
 				new TWEEN.Tween(GroupKey.children[VisibleKey].position).to({x: 0, y: 90, z: 150}, 2000 ).easing(TWEEN.Easing.Elastic.Out).start();
 				new TWEEN.Tween(GroupKey.children[VisibleKey].rotation).to({x: 1.64, y: 0, z: 0}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
 				animCameraStart = true;
@@ -349,7 +360,9 @@
 				GroupKey.children[i].visible = true;
 				GroupKey.children[i].rotation.set(0, 1.2, 0);
 			}
-			$.getJSON('game/GameData.js', function(result){StartConfigKeys(result); LoadStartText(result);});
+			//$.getJSON('game/GameData.js', function(result){StartConfigKeys(result); LoadStartText(result);});
+			StartConfigKeys(DataGame);
+			LoadStartText(DataGame);
 			MoseClickReturn = false;
 			MoseClick = true;
 			addRondValue = true;

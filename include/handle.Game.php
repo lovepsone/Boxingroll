@@ -12,7 +12,7 @@
 		    DBH_AddOpenChest();
 		    break;
 		  case 'DBH_DeleteKey':
-		    DBH_DeleteKey($value);
+		    DBH_DeleteKey((int)$value);
 		    break;
 		  case 'getCountKey':
 		    $result = getCountKey();
