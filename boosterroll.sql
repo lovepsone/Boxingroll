@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-06-18 11:24:25
+Date: 2015-06-22 18:59:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -69,7 +69,7 @@ INSERT INTO `settings` VALUES ('StartPage', 'index.php');
 INSERT INTO `settings` VALUES ('theme', 'default');
 INSERT INTO `settings` VALUES ('StartLocale', 'ru');
 INSERT INTO `settings` VALUES ('CountNewsPage', '5');
-INSERT INTO `settings` VALUES ('countCost', '100,300,500,1000');
+INSERT INTO `settings` VALUES ('TypeKeyCash', '1:100,2:300,3:500,4:1000');
 INSERT INTO `settings` VALUES ('countBox', '1,3,5,10,30');
 
 -- ----------------------------
@@ -108,5 +108,5 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '41', '2', '4', '5', '30', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '9600');
-INSERT INTO `user` VALUES ('3', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '10', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '10000');
+INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '100000');
+INSERT INTO `user` VALUES ('3', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '100000');

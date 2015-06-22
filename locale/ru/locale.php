@@ -1,11 +1,19 @@
 ﻿<?
 $locale = array();
 $locnav = array();
+$locKey = array();
+
 $locnav[1] = 'Главная';
 $locnav[2] = 'Играть';
 $locnav[3] = 'Магазин';
 $locnav[4] = 'Сылка 4';
 $locnav[5] = 'Сылка 5';
+
+$locKey[1] = '<span style="color:#B6B5B4">Key Normal</span> - ключ обычного типа. Среди пиратов пользуется малым спросам, так как в покупке очень дешевый. В основном часто используют новички.';
+$locKey[2] = '<span style="color:#EBC85D">Key Gold</span> - ключ золотого типа. В руках пирата ходовой ключ. Спрос на этот ключ немного больше. Ключ данного типа подходит для более опытных пиратов.';
+$locKey[3] = '<span style="color:#7E757F">Key Platinum</span> - ключ типа метал. Редкий ключ для новичка и опытного пирата. На рынке пиратов стоит немалых денег, но цена оправдывает себя.';
+$locKey[4] = '<span style="color:#BF997C">Key Premium</span> - ключ Веселого Роджера. Ключ сделан из драгоценного металла. На рынке такого ключа не найти. Только профи имеют данный ключ.';
+
 $locale['auth'] = 'Авторизация';
 $locale['name'] = 'e-mail: ';
 $locale['pass'] = 'пароль: ';
@@ -18,9 +26,10 @@ $locale['reg_mail'] = 'e-Mail: ';
 $locale['reg_pass1'] = 'Пароль: ';
 $locale['reg_pass2'] = 'Повторите пароль: ';
 $locale['registre'] = 'зарегистрироваться';
-$locale['SellKeys'] = 'ключей';
-$locale['CostKeysType'] = 'Ценавой тип ключей:';
+//$locale['SellKeys'] = 'ключей';
+$locale['CostKey'] = 'цена:';
 $locale['buy'] = 'Купить';
+$locale['count'] = 'Количество:';
 $locale['chat'] = 'Мини-Чат';
 $locale['chat_Button'] = 'Отправить';
 $locale['chat_non_msg'] = 'Для общения в чате требуется Авторизация!!!';
@@ -58,8 +67,8 @@ $locale['keys'] = 'Текущие ключи';
 $locale['kopecks'] = 'Текущие жетоны';
 $locale['CashInfo'] = 'Денежные средства';
 $locale['cCloseBox'] = 'Кол-во мнимых ящиков:';
-$locale['cAddCash'] = 'Кол-во введенных средств:';
-$locale['cOutCash'] = 'Кол-во выведенных средств:';
+$locale['cAddCash'] = 'Введенных средств:';
+$locale['cOutCash'] = 'Выведенных средств:';
 $locale['CountCsh'] = 'Состояние счета:';
 
 $locale['overallStatsProject'] = 'Общая статистика проекта';
@@ -71,4 +80,6 @@ $locale['overallCountAddCash'] = 'Пополнено денежных средс
 $locale['GameNonChat'] = 'Во время игры нельзя использовать чат.';
 $locale['GameStart'] = 'Для открытия сундука нажмите на имеющийся у вас ключик.';
 $locale['GameEnd'] = 'Чтобы закончить розыгрыш нажмите на цифру.';
+
+
 ?>

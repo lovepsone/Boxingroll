@@ -6,41 +6,46 @@
 	openbox($locnav[3]);
 
 	$countBox = explode(",", $Config['countBox']);
-	$countCost = explode(",", $Config['countCost']);
 
-	if (isset($_POST['BuyBox']) && isset($_POST['cost']) && $_POST['cost'] > 0)
+	$DataKey = array();
+	$TypeKeyCash = explode(",", $Config['TypeKeyCash']);
+	for ($i = 0; $i < count($TypeKeyCash); $i++)
+	{
+		$tmp = explode(":",  $TypeKeyCash[$i]);
+		$DataKey[$i] = array('id' => $tmp[0], 'cost' => $tmp[1]);
+	}
+
+	if (isset($_POST['BuyKey']) && isset($_POST['CountBuyKey']) && (int)$_POST['CountBuyKey'] > 0)
 	{
 		// проверка кеша
-		$cash = (int)$_POST['cost'] * (int)$_POST['box'];
+		$CountBuyKey = (int)$_POST['CountBuyKey'];
+		$TypeKey = (int)$_POST['keys'];
+		$cash = $CountBuyKey * $DataKey[$TypeKey - 1]['cost'];
 		if ($cash <= $USER->CountCsh)
 		{
 			//type box
-			$typebox = 0; $darr = array(); $sql = "";
-			for ($i = 0; $i < count($countCost); $i++)
-			{
-				if ($countCost[$i] == $_POST['cost']) $typebox = $i;
-			}
+			$darr = array(); $sql = "";
 
 			$darr['id'] = $USER->id;
-			$darr['s1'] = $USER->SellKey + $_POST['box'];
+			$darr['s1'] = $USER->SellKey + $CountBuyKey;
 			$darr['cc'] = $USER->CountCsh - $cash;
 
-			switch($typebox)
+			switch($TypeKey)
 			{
-				case 0:
-					$darr['s2'] = $USER->SellKeyNormal + (int)$_POST['box'];
+				case 1:
+					$darr['s2'] = $USER->SellKeyNormal + $CountBuyKey;
 					$sql = "UPDATE user SET SellKey=:s1, SellKeyNormal=:s2, CountCsh=:cc WHERE id=:id";
 					break;
-				case 1:
-					$darr['s2'] = $USER->SellKeyGold + (int)$_POST['box'];
+				case 2:
+					$darr['s2'] = $USER->SellKeyGold + $CountBuyKey;
 					$sql = "UPDATE user SET SellKey=:s1, SellKeyGold=:s2, CountCsh=:cc WHERE id=:id";
 					break;
-				case 2:
-					$darr['s2'] = $USER->SellKeyPlatinum + (int)$_POST['box'];
-					$sql = "UPDATE user SET SellKey=:s1, SellBKeyPlatinum=:s2, CountCsh=:cc WHERE id=:id";
-					break;
 				case 3:
-					$darr['s2'] = $USER->SellKeyPremium + (int)$_POST['box'];
+					$darr['s2'] = $USER->SellKeyPlatinum + $CountBuyKey;
+					$sql = "UPDATE user SET SellKey=:s1, SellKeyPlatinum=:s2, CountCsh=:cc WHERE id=:id";
+					break;
+				case 4:
+					$darr['s2'] = $USER->SellKeyPremium + $CountBuyKey;
 					$sql = "UPDATE user SET SellKey=:s1, SellKeyPremium=:s2, CountCsh=:cc WHERE id=:id";
 					break;
 			}
@@ -57,31 +62,30 @@
 	else
 	{
 		echo '<form method="post">';
-		echo '<tr><td align="center" valign="top"><hr size="5"></td></tr>';
+		echo '<tr><td align="center" colspan="10" valign="top"><hr size="2"></td></tr>';
 	
-		$listCost = '';
 	
-		for ($i = 0; $i < count($countCost); $i++)
-		{
-			$listCost .= '<option value="'.$countCost[$i].'">'.$countCost[$i].'&nbsp;p.</option>';
-		}
-	
-		for ($i = 0; $i < count($countBox); $i++)
+		for ($i = 0; $i < count($DataKey); $i++)
 		{
 			$check = '';
 			if ($i == 0) $check = 'checked';
-			echo '<tr><td align="center" class="shop" height="30px"><input name="box" type="radio" value="'.$countBox[$i].'" '.$check.'>&nbsp;x'.$countBox[$i].'&nbsp;'.$locale['SellKeys'].'</td></tr>';
+			echo '<tr height="100px"><td align="center" class="shop" width="60px"><img src="'.BASEDIR.'images/key/'.$DataKey[$i]['id'].'.png" height="45px"/><td>';
+			echo '<td align="left" class="shop">'.$locKey[$DataKey[$i]['id']].'</td>';
+			echo '<td align="center" class="shop" width="160px">'.$locale['CostKey'].'&nbsp;&nbsp;'.$DataKey[$i]['cost'].'&nbsp;p.</td>';
+			echo '<td align="center" class="shop" width="60px"><input name="keys" type="radio" value="'.$DataKey[$i]['id'].'" '.$check.'>&nbsp;</td></tr>';
 	
 		}
-		echo '<tr><td align="center" class="shop" height="30px">'.$locale['CostKeysType'].'&nbsp;<select name="cost" class="textbox" style="width:250px">'.$listCost.'</select></td></tr>';
+		
 		if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
 		{
-			echo '<tr><td align="center" class="shop" height="30px"><input type="submit" name="BuyBox" value="'.$locale['buy'].'" style="width:170px;" class="BoxButton" /></td></tr>';
+			echo '<tr><td colspan="5" align="center" class="shop" height="30px">'.$locale['count'].'&nbsp;&nbsp;<input type="text" name="CountBuyKey" value="1" style="width:100px;" />';
+			echo '&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="BuyKey" value="'.$locale['buy'].'" style="width:170px;" class="BoxButton" /></td></tr>';
 		}
 		else
 		{
-			echo '<tr><td align="center" height="30px"><span class="shop-msg">'.$locale['shop_msg_auth'].'</span></td></tr>';
+			echo '<tr><td colspan="5" align="center" height="30px"><span class="shop-msg">'.$locale['shop_msg_auth'].'</span></td></tr>';
 		}
+
 		echo '</form>';
 	}
 	closebox();
