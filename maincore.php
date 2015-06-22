@@ -66,6 +66,9 @@
 		}
 		return $salt;
 	}
+	//--------------------------------------------------------------------------------------------------
+	// 
+	//--------------------------------------------------------------------------------------------------
 
 	// functions
 	function getCountKey()
@@ -130,6 +133,7 @@
 		    break;
 		  case 1:
 		    $row = "`KopeckGold`=KopeckGold+".$value;
+		    break;
 		  case 2:
 		    $row = "`KopeckPlatinum`=KopeckPlatinum+".$value;
 		    break;
@@ -161,6 +165,7 @@
 		    break;
 		  case 1:
 		    $row = "`SellKeyGold`=SellKeyGold-1";
+		    break;
 		  case 2:
 		    $row = "`SellKeyPlatinum`=SellKeyPlatinum-1";
 		    break;
