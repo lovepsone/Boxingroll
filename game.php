@@ -47,7 +47,6 @@
 
 	$(window).load(function(){$.getJSON('game/GameData.js', function(result){DataGame = result; LoadScene(result);});});
 
-//function wait() {if(!flagTimeout) setTimeout('wait()',100); else return;}
 
 	function init()
 	{
@@ -60,11 +59,12 @@
 		$("#BoxingRollGame").append(txtGameLoad);
 		camera = new THREE.PerspectiveCamera(100, renderer.domElement.offsetWidth / renderer.domElement.offsetHeight, 1, 2000);
 		camera.position.z = 500;
+		camera.position.y = 100;
 
 		if (debug) console.log('[DEBUG]: render [PixelRatio:%s] [offset(W/H):%s/%s]', window.devicePixelRatio, renderer.domElement.offsetWidth, renderer.domElement.offsetHeight);
 
 		scene = new THREE.Scene();
-		scene.fog = new THREE.Fog( 0x708090, 0.015, 1200 );
+		scene.fog = new THREE.Fog(0x708090, 0.115, 800);
 		raycaster = new THREE.Raycaster();
 		mouse = new THREE.Vector2();
 		clock = new THREE.Clock();
@@ -141,7 +141,7 @@
 			meshCave = new THREE.Mesh(geometry, material);
 			meshCave.scale.set(90, 90, 90);
 			meshCave.position.y = -50;
-			meshCave.position.z = 0;
+			meshCave.position.z = -40;
 			meshCave.castShadow = true;
 			meshCave.rotation.y = 2.00;
 			meshCave.visible = false;
