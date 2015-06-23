@@ -39,33 +39,33 @@
 		  "name": "keyNormal",
 		  "model": "game/key/keyNormal.js",
 		  "scale": [10, 10, 10],
-		  "position": [-180, 180, 180]
+		  "position": [-210, 180, 180]
 		},
 		{
 		  "id": 1,
 		  "name": "keyGold",
 		  "model": "game/key/keyGold.js",
 		  "scale": [10, 10, 10],
-		  "position": [180, 180, 180]
+		  "position": [130, 180, 180]
 		},
 		{
 		  "id": 2,
 		  "name": "keyPlatinum",
 		  "model": "game/key/keyPlatinum.js",
 		  "scale": [10, 10, 10],
-		  "position": [-180, -180, 180]
+		  "position": [-280, 0, 180]
 		},
 		{
 		  "id": 3,
 		  "name": "keyPremium",
 		  "model": "game/key/keyPremium.js",
 		  "scale": [10, 10, 10],
-		  "position": [180, -180, 180]
+		  "position": [230, 0, 180]
 		}],
 	"plane": [{
 		  "id": 0,
 		  "name": "Normal",
-		  "model": [130, 70, 1, 1],
+		  "model": [160, 70, 1, 1],
 		  "scale": [10, 10, 10],
 		  "position": [-130, 210, 185]
 		},
@@ -74,49 +74,49 @@
 		  "name": "Gold",
 		  "model": [130, 70, 1, 1],
 		  "scale": [10, 10, 10],
-		  "position": [230, 210, 185]
+		  "position": [180, 210, 185]
 		},
 		{
 		  "id": 2,
 		  "name": "Platinum",
 		  "model": [130, 70, 1, 1],
 		  "scale": [10, 10, 10],
-		  "position": [-130, -150, 185]
+		  "position": [-230, 30, 185]
 		},
 		{
 		  "id": 3,
 		  "name": "Premium",
 		  "model": [130, 70, 1, 1],
 		  "scale": [10, 10, 10],
-		  "position": [230, -150, 185]
+		  "position": [270, 30, 185]
 		}],
 	"text": [{
 		  "id": 0,
 		  "name": "txtNormal",
 		  "size": 40,
 		  "height": 5,
-		  "position": [-150, 190, 180]
+		  "position": [-180, 190, 180]
 		},
 		{
 		  "id": 1,
 		  "name": "txtGold",
 		  "size": 40,
 		  "height": 5,
-		  "position": [210, 190, 180]
+		  "position": [160, 190, 180]
 		},
 		{
 		  "id": 2,
 		  "name": "txtPlatinum",
 		  "size": 40,
 		  "height": 5,
-		  "position": [-150, -170, 180]
+		  "position": [-250, 10, 180]
 		},
 		{
 		  "id": 3,
 		  "name": "txtPremium",
 		  "size": 40,
 		  "height": 5,
-		  "position": [210, -170, 180]
+		  "position": [260, 10, 180]
 		}],
 	"kopeck": [{
 		  "id": 0,

@@ -4,11 +4,21 @@
 	require_once THEMES.'header.php';
 	HeadMenu();
 	echo '<script src="include/js/three.min.js"></script>';
+
 	echo '<script src="include/js/renderers/Projector.js"></script>';
 	echo '<script src="include/js/renderers/CanvasRenderer.js"></script>';
+
 	echo '<script src="include/js/libs/tween.min.js"></script>';
 	echo '<script src="include/js/fonts/helvetiker_regular.typeface.js"></script>';
 	echo '<script src="include/js/ShaderParticles.min.js"></script>';
+
+	echo '<script src="include/js/shaders/CopyShader.js"></script>';
+	echo '<script src="include/js/shaders/FXAAShader.js"></script>';
+	echo '<script src="include/js/postprocessing/EffectComposer.js"></script>';
+	echo '<script src="include/js/postprocessing/RenderPass.js"></script>';
+	echo '<script src="include/js/postprocessing/ShaderPass.js"></script>';
+	echo '<script src="include/js/postprocessing/MaskPass.js"></script>';
+
 	openbox();
 	echo '<tr><td><div id="BoxingRollGame" align="center"></div><script>';
 ?>
@@ -23,8 +33,9 @@
 	var VisibleKey, RotateKeys = true, animKeyStart = false, animKeyRotateVisible = false;
 	var animCameraStart = false, animCameraPositionStart = false, animCamera = 1.5, animTimerCamera = 0.00;
 	var emitter, particleGroup, startAnimParticle = false;
-
+	var meshCave;
 	var DataGame, LoaderEnd = false, UserGame;
+	var pointLight;
 
 	var txtGameStart = '<span id="game-msg" style="position:absolute; left:370px; top:220px;"><?php echo $locale['GameStart']; ?></span>';
 	var txtGameLoad = '<span id="game-msg-loader" style="font-size:23px;position:absolute; left:' + (280 + SCREEN_WIDTH/2) + 'px; top:' + (180 + SCREEN_HEIGHT/2) + 'px;">Loading...</span>';
@@ -44,14 +55,16 @@
 		renderer.setClearColor(0x010e16); //010E16;
 		renderer.setPixelRatio(window.devicePixelRatio);
 		renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+		renderer.shadowMapEnabled = true;
 		$("#BoxingRollGame").append(renderer.domElement);
 		$("#BoxingRollGame").append(txtGameLoad);
-		camera = new THREE.PerspectiveCamera(100, renderer.domElement.offsetWidth / renderer.domElement.offsetHeight, 1, 600);
+		camera = new THREE.PerspectiveCamera(100, renderer.domElement.offsetWidth / renderer.domElement.offsetHeight, 1, 2000);
 		camera.position.z = 500;
 
 		if (debug) console.log('[DEBUG]: render [PixelRatio:%s] [offset(W/H):%s/%s]', window.devicePixelRatio, renderer.domElement.offsetWidth, renderer.domElement.offsetHeight);
 
 		scene = new THREE.Scene();
+		scene.fog = new THREE.Fog( 0x708090, 0.015, 1200 );
 		raycaster = new THREE.Raycaster();
 		mouse = new THREE.Vector2();
 		clock = new THREE.Clock();
@@ -63,11 +76,27 @@
 		GroupChest.visible = false;
 		GroupKey.visible = false;
 		GroupPlane.visible = false;
-
+		initLight();
 		document.addEventListener('mousedown', onDocumentMouseDown, false);
 		document.addEventListener('mousemove', onDocumentMouseMove, false);
 		document.addEventListener('touchstart', onDocumentTouchStart, false);
 		window.addEventListener('resize', onWindowResize, false );
+	}
+
+	function initLight()
+	{
+		var ambient = new THREE.AmbientLight( 0x101010 );
+		scene.add(ambient);
+
+		pointLight = new THREE.PointLight( 0xffffff );
+		scene.add(pointLight);
+		var geometry = new THREE.SphereGeometry(100, 16, 8);
+		var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) );
+		mesh.scale.set(0.05, 0.05, 0.05);
+		pointLight.add(mesh);
+		pointLight.position.z = 200;
+		pointLight.position.y = 400;
+
 	}
 
 	function initParticles()
@@ -103,15 +132,31 @@
 	function LoadScene(data)
 	{
 		var loader = new THREE.JSONLoader();
-		LoaderChest = false, LoaderKeys = false, LoaderPlanes = false, LoaderKopecks = false;
+		LoaderChest = false, LoaderKeys = false, LoaderPlanes = false, LoaderKopecks = false, LoaderCave = false;
+
+		loader.load('game/cave.json', function(geometry)
+		{
+			var texture = THREE.ImageUtils.loadTexture('game/cave.gif');
+			var material = new THREE.MeshPhongMaterial({ map: texture, specular:null, shininess: 0, shading: THREE.FlatShading });
+			meshCave = new THREE.Mesh(geometry, material);
+			meshCave.scale.set(90, 90, 90);
+			meshCave.position.y = -50;
+			meshCave.position.z = 0;
+			meshCave.castShadow = true;
+			meshCave.rotation.y = 2.00;
+			meshCave.visible = false;
+			scene.add(meshCave);
+		});
+
 		for (var i = 0; i < data['chest'].length; i++)
 		{
 			if (i < data['chest'].length)
 			{
 				loader.load(data['chest'][i]['model'], function(geometry, materials)
 				{
-					var material = new THREE.MeshFaceMaterial(materials);
+					var material = new THREE.MeshPhongMaterial( { map: materials[0].map, /*specular: 0x009900,*/ shininess: 30, shading: THREE.FlatShading } );
 					mesh = new THREE.Mesh(geometry, material);
+					mesh.castShadow = true;
 			        	GroupChest.add(mesh);
 				});
 			}
@@ -146,6 +191,8 @@
 		loader.onLoadComplete = function()
 		{
 			LoaderPlanes = true;
+			if (typeof meshCave  != 'undefined')
+				LoaderCave = true;
 			if (GroupChest.children.length == data['chest'].length)
 				StartConfigChest(data);
 			if (GroupKey.children.length == data['keys'].length)
@@ -164,16 +211,17 @@
 			}
 			if (GroupChest.children.length == data['chest'].length && GroupKey.children.length == data['keys'].length && GroupKopeck.children.length == data['kopeck'].length)
 			{
-				if (LoaderChest && LoaderKeys && LoaderPlanes && LoaderKopecks)
+				if (LoaderChest && LoaderKeys && LoaderPlanes && LoaderKopecks && LoaderCave)
 				{
+					meshCave.visible = true;
 					GroupChest.visible = true;
-					GroupKey.visible = true;
 					GroupPlane.visible = true;
 					GroupText.visible = true;
 					//GroupKopeck.visible = true;
 					LoaderEnd = true;
 					$("#game-msg-loader").remove();
 					$("#BoxingRollGame").append(txtGameStart);
+					GroupKey.visible = true;
 				}
 			}
 		};
@@ -389,6 +437,11 @@
 
         function render(dt)
 	{
+		//pointLight.rotation.z += 0.1;
+		/*var r = clock.getElapsedTime();
+		pointLight.position.x = 200 * Math.cos( r );
+		pointLight.position.z = 200 * Math.sin( r );*/
+
 		if (LoaderEnd)
 		{
 			animCameraGame();
