@@ -16,6 +16,31 @@
 		}
 	}
 
+	function RedirectTime($location, $time = 30)
+	{
+		echo"<script type='text/javascript'> <!--
+		function exec_refresh()
+		{
+  			window.status = 'reloading...' + myvar;
+  			myvar = myvar + ' .';
+  			var timerID = setTimeout('exec_refresh();', 100);
+  			if (timeout > 0)
+			{
+				timeout -= 1;
+			}
+			else
+			{
+    				clearTimeout(timerID);
+    				window.status = '';
+    				window.location = '".$location."';
+    			}
+		}
+		var myvar = '';
+		var timeout = '".$time."';
+		exec_refresh();
+		//--> </script>";
+	}
+
 	$folder_level = ''; $i = 0;
 	while (!file_exists($folder_level.'conf.php'))
 	{

@@ -75,6 +75,8 @@ $locale['cAddCash'] = 'Введенных средств:';
 $locale['cOutCash'] = 'Выведенных средств:';
 $locale['CountCsh'] = 'Состояние счета:';
 
+$locale['redirect'] = 'Через 3 секунды вы будете перенаправлены на предыдущую страницу сайта.';
+
 $locale['overallStatsProject'] = 'Общая статистика проекта';
 $locale['overallCountUser'] = 'Зарегистр. пользователей:';
 $locale['overallCountGameBox'] = 'Кол-во сыгранных ящиков:';
@@ -84,6 +86,5 @@ $locale['overallCountAddCash'] = 'Пополнено денежных средс
 $locale['GameNonChat'] = 'Во время игры нельзя использовать чат.';
 $locale['GameStart'] = 'Для открытия сундука нажмите на имеющийся у вас ключик.';
 $locale['GameEnd'] = 'Чтобы закончить розыгрыш нажмите на цифру.';
-
 
 ?>

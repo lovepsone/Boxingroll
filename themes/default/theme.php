@@ -188,5 +188,12 @@
 
 		echo '</td></tr></table>';
 	}
+
+	function RedirectBox($url)
+	{
+		global $locale;
+		echo '<tr><td align="center" width="100%">'.$locale['redirect'].'</td></tr>';
+		RedirectTime($url);
+	}
 ?>
 

@@ -3,7 +3,6 @@
 	require_once 'maincore.php';
 	require_once THEMES.'header.php';
 	HeadMenu();
-	openbox($locnav[3]);
 
 	$DataKey = getDataKey();
 	$DataLable = array(
@@ -46,11 +45,13 @@
 			}
 			$STH = $DBH->prepare($sql);
 			$STH->execute($darr);
-			Redirect(BASEDIR.'handle.php?cmd=0', true);
+			openbox($locale['shop_msg_sucess']);
+			RedirectBox(BASEDIR.'shop.php');
 		}
 		else
 		{
-			Redirect(BASEDIR.'handle.php?cmd=1', true);
+			openbox($locale['shop_msg_err_cash']);
+			RedirectBox(BASEDIR.'shop.php');
 		}
 		
 	}
@@ -86,20 +87,24 @@
 
 				$STH = $DBH->prepare("UPDATE user SET CountCsh=:cc, TimerVipLabelPirate=:d WHERE id=:id");
 				$STH->execute($darr);
-				Redirect(BASEDIR.'handle.php?cmd=0', true);
+				openbox($locale['shop_msg_sucess']);
+				RedirectBox(BASEDIR.'shop.php');
 			}
 			else
 			{
-				Redirect(BASEDIR.'handle.php?cmd=1', true);
+				openbox($locale['shop_msg_err_cash']);
+				RedirectBox(BASEDIR.'shop.php');
 			}
 		}
 		else
 		{
-			Redirect(BASEDIR.'handle.php?cmd=1', true);
+			openbox($locale['shop_msg_err_cash']);
+			RedirectBox(BASEDIR.'shop.php');
 		}
 	}
 	else
 	{
+		openbox($locnav[3]);
 		echo '<form method="post">';
 		echo '<tr><td align="center" colspan="10" valign="top"><hr size="2"></td></tr>';
 	
