@@ -36,7 +36,8 @@
 			echo '<tr><td class="boxRightText">'.$locale['cSellKey'].'</td><td class="boxRightValue" align="right">'.$USER->SellKey.'</td></tr>';
 			echo '<tr><td class="boxRightText">'.$locale['cOpenChest'].'</td><td class="boxRightValue" align="right">'.$USER->OpenChest.'</td></tr>';
 			echo '<tr><td class="boxRightText">'.$locale['cKopeck'].'</td><td class="boxRightValue" align="right">'.$USER->Kopeck.'</td></tr>';
-	
+			echo '<tr><td class="boxRightText">'.$locale['IncomeCash'].'</td><td class="boxRightValue" align="right">'.$USER->IncomeCash.'</td></tr>';
+
 			echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['keys'].'</b></span></td></tr>';
 			echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
 			echo '<tr><td class="boxRightText" align="left" valing="middle">';
