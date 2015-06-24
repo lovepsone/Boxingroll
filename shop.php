@@ -5,18 +5,11 @@
 	HeadMenu();
 	openbox($locnav[3]);
 
-	$DataKey = array();
+	$DataKey = getDataKey();
 	$DataLable = array(
 	0 => array('img' => 'images/label/1.png', 'locale' => $locLabel[0], 'cost' => $Config['CostLabelPirate1']),
 	1 => array('img' => 'images/label/2.png', 'locale' => $locLabel[1], 'cost' => $Config['CostLabelPirate2'])
 	);
-
-	$TypeKeyCash = explode(",", $Config['TypeKeyCash']);
-	for ($i = 0; $i < count($TypeKeyCash); $i++)
-	{
-		$tmp = explode(":",  $TypeKeyCash[$i]);
-		$DataKey[$i] = array('id' => $tmp[0], 'cost' => $tmp[1]);
-	}
 
 	if (isset($_POST['BuyKey']) && isset($_POST['CountBuyKey']) && (int)$_POST['CountBuyKey'] > 0 && isset($_POST['BuyKey']))
 	{

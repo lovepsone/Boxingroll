@@ -41,12 +41,127 @@
 	while($row = $STH->fetch(PDO::FETCH_ASSOC))
 		$Config[$row['setting']] = $row['value'];
 
+
+	function getDataKey()
+	{
+		global  $Config;
+		$buf = array();
+		$TypeKeyCash = explode(",", $Config['TypeKeyCash']);
+		for ($i = 0; $i < count($TypeKeyCash); $i++)
+		{
+			$tmp = explode(":",  $TypeKeyCash[$i]);
+			$buf[$i] = array('id' => $tmp[0], 'cost' => $tmp[1]);
+		}
+		return $buf;
+	}
+
 	$USER = null;
 	if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
 	{
+		$DataIncom = array(); $DataKopeck = array();
 		$STH = $DBH->query("SELECT * FROM user WHERE id=".$_SESSION['id']." AND mail='".$_SESSION['user']."' AND password='".$_SESSION['p']."'");
 		$STH->execute();
 		$USER = $STH->fetch(PDO::FETCH_OBJ);
+
+		//*-----------------------------
+		//* system in game
+		//*------------------------------
+		$STH = $DBH->prepare("SELECT * FROM `income` WHERE `Normal` > 0 OR `Gold` > 0 OR `Platinum` > 0 OR `Premium` > 0");
+		$STH->execute();
+		$i = 0;
+		while($row = $STH->fetch(PDO::FETCH_ASSOC))
+		{
+			$DataIncom[$i] = $row;
+			$i++;
+		}
+
+		if (count($DataIncom) > 0)
+		{
+			$idIncom = rand(0, count($DataIncom) - 1);
+			$IncomType = 0; $IncomTypeRand = array(); $sql = ""; $idDataKopeck = 0;
+			$DataIncomType = array(
+				0 => $DataIncom[$idIncom]['Normal'],
+				1 => $DataIncom[$idIncom]['Gold'],
+				2 => $DataIncom[$idIncom]['Platinum'],
+				3 => $DataIncom[$idIncom]['Premium']
+			);
+
+			$j = 0;
+			for ($i = 0; $i < count($DataIncomType); $i++)
+			{
+				if ($DataIncomType[$i] > 0)
+				{
+					$IncomTypeRand[$j] = $i;
+					$j++;
+				}
+			}
+
+			if (count($IncomTypeRand) > 0)
+			{
+				$IncomType = rand(0, count($IncomTypeRand ) - 1);
+
+				switch ($IncomType)
+				{
+				  case 0:
+				    $sql = "SELECT `id`, `KopeckNormal` FROM `user` WHERE `id` <> :i AND `KopeckNormal` > 0 ";
+				    break;
+				  case 1:
+				    $sql = "SELECT `id`, `KopeckGold` FROM `user` WHERE `id` <> :i AND `KopeckGold` > 0 ";
+				    break;
+				  case 2:
+				    $sql = "SELECT `id`, `KopeckPlatinum` FROM `user` WHERE `id` <> :i AND `KopeckPlatinum` > 0 ";
+				    break;
+				  case 3:
+				    $sql = "SELECT `id`, `KopeckPremium` FROM `user` WHERE `id` <> :i AND `KopeckPremium` > 0 ";
+				    break;
+				}
+			}
+
+			if (strlen($sql) > 1)
+			{
+				$STH = $DBH->prepare($sql);
+				$STH->execute(array('i' => $_SESSION['id']));
+				$i = 0;
+				while($row = $STH->fetch(PDO::FETCH_ASSOC))
+				{
+					$DataKopeck[$i] = $row;
+					$i++;
+				}
+			}
+			if (count($DataKopeck) > 0)
+			{
+				$idDataKopeck = rand(0, count($DataKopeck) - 1);
+				$buf = getDataKey();
+				$csh = $buf[$IncomType]['cost']*$Config['IncomeUser']/100;
+				switch ($IncomType)
+				{
+				  case 0:
+				    $STH = $DBH->prepare("UPDATE `income` SET `Normal`=Normal-1 WHERE id_user=:i");
+				    $STH->execute(array('i' => $DataIncom[$idIncom]['id_user']));
+				    $STH = $DBH->prepare("UPDATE `user` SET `Kopeck`=Kopeck-1, `KopeckNormal`=KopeckNormal-1, `CountCsh`=CountCsh+:cc1, `IncomeCash`=IncomeCash+:cc2 WHERE id=:i");
+				    $STH->execute(array('cc1' => $csh, 'cc2' => $csh, 'i' => $DataKopeck[$idDataKopeck]['id']));
+				    break;
+				  case 1:
+				    $STH = $DBH->prepare("UPDATE `income` SET `Gold`=Gold-1 WHERE id_user=:i");
+				    $STH->execute(array('i' => $DataIncom[$idIncom]['id_user']));
+				    $STH = $DBH->prepare("UPDATE `user` SET `Kopeck`=Kopeck-1, `KopeckGold`=KopeckGold-1, `CountCsh`=CountCsh+:cc1, `IncomeCash`=IncomeCash+:cc2 WHERE id=:i");
+				    $STH->execute(array('cc1' => $csh, 'cc2' => $csh, 'i' => $DataKopeck[$idDataKopeck]['id']));
+				    break;
+				  case 2:
+				    $STH = $DBH->prepare("UPDATE `income` SET `Platinum`=Platinum-1 WHERE id_user=:i");
+				    $STH->execute(array('i' => $DataIncom[$idIncom]['id_user']));
+				    $STH = $DBH->prepare("UPDATE `user` SET `Kopeck`=Kopeck-1, `KopeckPlatinum`=KopeckPlatinum-1, `CountCsh`=CountCsh+:cc1, `IncomeCash`=IncomeCash+:cc2 WHERE id=:i");
+				    $STH->execute(array('cc1' => $csh, 'cc2' => $csh, 'i' => $DataKopeck[$idDataKopeck]['id']));
+				    break;
+				  case 3:
+				    $STH = $DBH->prepare("UPDATE `income` SET `Premium`=Premium-1 WHERE id_user=:i");
+				    $STH->execute(array('i' => $DataIncom[$idIncom]['id_user']));
+				    $STH = $DBH->prepare("UPDATE `user` SET `Kopeck`=Kopeck-1, `KopeckPremium`=KopeckPremium-1, `CountCsh`=CountCsh+:cc1, `IncomeCash`=IncomeCash+:cc2 WHERE id=:i");
+				    $STH->execute(array('cc1' => $csh, 'cc2' => $csh, 'i' => $DataKopeck[$idDataKopeck]['id']));
+				    break;
+				}
+			}
+		}
 	}
 	// locale
 	if(!@include(BASEDIR.'locale/'.$Config['StartLocale'].'/locale.php'))
@@ -176,5 +291,13 @@
 
 		$STH = $DBH->prepare("UPDATE `user` SET `SellKey`=SellKey-1, ".$row." WHERE id=:i AND mail=:m AND password=:p");
 		$STH->execute(array('i' => $_SESSION['id'], 'm' => $_SESSION['user'], 'p' => $_SESSION['p']));
+	}
+
+	function DBH_UpdateIncome($str)
+	{
+		global $DBH, $_SESSION;
+		$tmp = explode(",", $str);
+		$STH = $DBH->prepare("UPDATE `income` SET `Normal`=Normal+:k0, `Gold`=Gold+:k1, `Platinum`=Platinum+:k2, `Premium`=Premium+:k3 WHERE id_user=:i");
+		$STH->execute(array('k0' => $tmp[0], 'k1' => $tmp[1], 'k2' => $tmp[2], 'k3' => $tmp[3], 'i' => $_SESSION['id']));
 	}
 ?>

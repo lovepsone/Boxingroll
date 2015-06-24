@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-06-24 10:15:41
+Date: 2015-06-24 13:37:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,25 @@ CREATE TABLE `chat` (
 -- ----------------------------
 INSERT INTO `chat` VALUES ('1', '1', 'Проверка чата!', '2015-05-31 16:21:17');
 INSERT INTO `chat` VALUES ('2', '1', 'Проверка цензуры: <span style=\'color:red\'>[Цензура]</span>', '2015-05-31 16:21:35');
+
+-- ----------------------------
+-- Table structure for `income`
+-- ----------------------------
+DROP TABLE IF EXISTS `income`;
+CREATE TABLE `income` (
+  `id_user` int(11) NOT NULL,
+  `Normal` int(11) NOT NULL default '0',
+  `Gold` int(11) NOT NULL default '0',
+  `Platinum` int(11) NOT NULL default '0',
+  `Premium` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id_user`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of income
+-- ----------------------------
+INSERT INTO `income` VALUES ('1', '1', '0', '0', '0');
+INSERT INTO `income` VALUES ('2', '0', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `news`
@@ -74,6 +93,7 @@ INSERT INTO `settings` VALUES ('CostLabelPirate1', '250');
 INSERT INTO `settings` VALUES ('CountKeyLabelPirate', '30');
 INSERT INTO `settings` VALUES ('CountDayLabelPirate', '30');
 INSERT INTO `settings` VALUES ('CostLabelPirate2', '1500');
+INSERT INTO `settings` VALUES ('IncomeUser', '90');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -105,6 +125,7 @@ CREATE TABLE `user` (
   `cAddCash` float(11,0) NOT NULL default '0',
   `cOutCash` float(11,0) NOT NULL default '0',
   `CountCsh` float(11,0) NOT NULL default '0',
+  `IncomeCash` float(11,0) NOT NULL default '0',
   `TimerVipLabelPirate` datetime NOT NULL,
   `ContLabelPirate` int(11) NOT NULL default '0',
   `DateLabelPirate` date NOT NULL,
@@ -114,5 +135,5 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '44', '33', '3', '4', '4', '15', '2', '2', '10', '1', '6', '0', '0', '0', '0', '0', '0', '85750', '2015-07-24 11:14:49', '60', '2015-06-24');
-INSERT INTO `user` VALUES ('2', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '100000', '0000-00-00 00:00:00', '30', '2015-06-24');
+INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '41', '30', '3', '4', '4', '18', '5', '2', '10', '1', '9', '0', '0', '0', '0', '0', '0', '85750', '0', '2015-07-24 11:14:49', '60', '2015-06-24');
+INSERT INTO `user` VALUES ('2', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '100000', '0', '0000-00-00 00:00:00', '30', '2015-06-24');

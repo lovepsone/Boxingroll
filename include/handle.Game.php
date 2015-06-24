@@ -14,14 +14,17 @@
 		  case 'DBH_DeleteKey':
 		    DBH_DeleteKey((int)$value);
 		    break;
+		  case 'DBH_AddRoundValue':
+		    DBH_AddRoundValue($value);
+		    break;
+		  case 'DBH_UpdateIncome':
+		    DBH_UpdateIncome($value);
+		    break;
 		  case 'getCountKey':
 		    $result = getCountKey();
 		    break;
 		  case 'RoundValueOpenChest':
 		    $result = RoundValueOpenChest();
-		    break;
-		  case 'DBH_AddRoundValue':
-		    DBH_AddRoundValue($value);
 		    break;
 		}
 		echo $result;

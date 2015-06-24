@@ -373,6 +373,7 @@
 
 				DBH_AddOpenChest();
 				DBH_DeleteKey(VisibleKey);
+				DBH_UpdateIncome(VisibleKey);
 				if (debug) console.log('[DEBUG]: onDocumentMouseDown [objectname:%s] [TypeKey:%s]', intersects[0].object.name, VisibleKey);
 
 				new TWEEN.Tween(GroupKey.children[VisibleKey].position).to({x: 0, y: 90, z: 150}, 2000 ).easing(TWEEN.Easing.Elastic.Out).start();
@@ -408,7 +409,6 @@
 				GroupKey.children[i].visible = true;
 				GroupKey.children[i].rotation.set(0, 1.2, 0);
 			}
-			//$.getJSON('game/GameData.js', function(result){StartConfigKeys(result); LoadStartText(result);});
 			StartConfigKeys(DataGame);
 			LoadStartText(DataGame);
 			MoseClickReturn = false;
@@ -566,18 +566,33 @@
 		GameUpdateUser();
 	}
 
+	function DBH_UpdateIncome(typeKey)
+	{
+		var str = '';
+		switch (typeKey)
+		{
+		  case 0:
+		    str = '1, 0, 0, 0';
+		    break;
+		  case 1:
+		    str = '0, 1, 0, 0';
+		    break;
+		  case 2:
+		    str = '0, 0, 1, 0';
+		    break;
+		  case 3:
+		    str = '0, 0, 0, 1';
+		    break;
+		  default:
+		    str = '0, 0, 0, 0';
+		    break;
+		}
+		$.ajax({ type: "POST", url: "include/handle.Game.php", data: {'data': 'DBH_UpdateIncome:'+str}});
+	}
+
 	function GameUpdateUser()
 	{
-		$.ajax(
-		{
-			type: "POST",
-			url: "include/handle.Game.php",
-			data: {'data': 'GameUpdateUser:0'},
-			success: function(data)
-			{
-				$("#GameUpdateUser").html(data);
-			}
-		});
+		$.ajax({type: "POST",url: "include/handle.Game.php",data: {'data': 'GameUpdateUser:0'},success: function(data){$("#GameUpdateUser").html(data);}});
 	}
 <?php
 
