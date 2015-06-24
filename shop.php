@@ -28,7 +28,6 @@
 		{
 			//type box
 			$darr = array(); $sql = "";
-
 			$darr['id'] = $USER->id;
 			$darr['s1'] = $USER->SellKey + $CountBuyKey;
 			$darr['cc'] = $USER->CountCsh - $cash;
@@ -64,7 +63,47 @@
 	}
 	else if (isset($_POST['BuyLable']))
 	{
-		echo 'sucessful';
+		$iLables = (int)$_POST['lables'];
+		if ($DataLable[$iLables]['cost'] <= $USER->CountCsh)
+		{
+			if ($iLables == 0)
+			{
+				$darr = array();
+				$darr['id'] = $USER->id;
+				$darr['cc'] = $USER->CountCsh - $DataLable[$iLables]['cost'];
+				$darr['clp'] = $USER->ContLabelPirate + $Config['CountKeyLabelPirate'];
+
+				$STH = $DBH->prepare("UPDATE user SET CountCsh=:cc, ContLabelPirate=:clp WHERE id=:id");
+				$STH->execute($darr);
+				Redirect(BASEDIR.'handle.php?cmd=0', true);
+			}
+			else if ($iLables == 1)
+			{
+				$darr = array();
+				$darr['id'] = $USER->id;
+				$darr['cc'] = $USER->CountCsh - $DataLable[$iLables]['cost'];
+				if ($USER->TimerVipLabelPirate > date("Y-m-d H:i:s"))
+				{
+					$darr['d'] = date("Y-m-d H:i:s", strtotime("+".$Config['CountDayLabelPirate']." day", strtotime($USER->TimerVipLabelPirate)));
+				}
+				else
+				{
+					$darr['d'] = date("Y-m-d H:i:s", strtotime("+".$Config['CountDayLabelPirate']." day", strtotime(date("Y-m-d H:i:s"))));
+				}
+
+				$STH = $DBH->prepare("UPDATE user SET CountCsh=:cc, TimerVipLabelPirate=:d WHERE id=:id");
+				$STH->execute($darr);
+				Redirect(BASEDIR.'handle.php?cmd=0', true);
+			}
+			else
+			{
+				Redirect(BASEDIR.'handle.php?cmd=1', true);
+			}
+		}
+		else
+		{
+			Redirect(BASEDIR.'handle.php?cmd=1', true);
+		}
 	}
 	else
 	{
