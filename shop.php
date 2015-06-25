@@ -16,37 +16,53 @@
 		$CountBuyKey = (int)$_POST['CountBuyKey'];
 		$TypeKey = (int)$_POST['keys'];
 		$cash = $CountBuyKey * $DataKey[$TypeKey - 1]['cost'];
+		
 		if ($cash <= $USER->CountCsh)
 		{
-			//type box
-			$darr = array(); $sql = "";
-			$darr['id'] = $USER->id;
-			$darr['s1'] = $USER->SellKey + $CountBuyKey;
-			$darr['cc'] = $USER->CountCsh - $cash;
-
-			switch($TypeKey)
+			if (strtotime($USER->TimerVipLabelPirate) > strtotime(date("Y-m-d H:i:s")) || ($USER->ContLabelPirate > 0 && $USER->ContLabelPirate >= $CountBuyKey))
 			{
-				case 1:
-					$darr['s2'] = $USER->SellKeyNormal + $CountBuyKey;
-					$sql = "UPDATE user SET SellKey=:s1, SellKeyNormal=:s2, CountCsh=:cc WHERE id=:id";
-					break;
-				case 2:
-					$darr['s2'] = $USER->SellKeyGold + $CountBuyKey;
-					$sql = "UPDATE user SET SellKey=:s1, SellKeyGold=:s2, CountCsh=:cc WHERE id=:id";
-					break;
-				case 3:
-					$darr['s2'] = $USER->SellKeyPlatinum + $CountBuyKey;
-					$sql = "UPDATE user SET SellKey=:s1, SellKeyPlatinum=:s2, CountCsh=:cc WHERE id=:id";
-					break;
-				case 4:
-					$darr['s2'] = $USER->SellKeyPremium + $CountBuyKey;
-					$sql = "UPDATE user SET SellKey=:s1, SellKeyPremium=:s2, CountCsh=:cc WHERE id=:id";
-					break;
+				$darr = array(); $sql = "";
+				$darr['id'] = $USER->id;
+				$darr['s1'] = $USER->SellKey + $CountBuyKey;
+				$darr['cc'] = $USER->CountCsh - $cash;
+				$darr['clp'] = 0;
+				if (strtotime($USER->TimerVipLabelPirate) < strtotime(date("Y-m-d H:i:s")))
+				{
+					$darr['clp'] = $USER->ContLabelPirate - $CountBuyKey;
+				}
+
+				switch($TypeKey)
+				{
+					case 1:
+						$darr['s2'] = $USER->SellKeyNormal + $CountBuyKey;
+						$sql = "UPDATE user SET SellKey=:s1, SellKeyNormal=:s2, CountCsh=:cc, ContLabelPirate=:clp WHERE id=:id";
+						break;
+					case 2:
+						$darr['s2'] = $USER->SellKeyGold + $CountBuyKey;
+						$sql = "UPDATE user SET SellKey=:s1, SellKeyGold=:s2, CountCsh=:cc, ContLabelPirate=:clp WHERE id=:id";
+						break;
+					case 3:
+						$darr['s2'] = $USER->SellKeyPlatinum + $CountBuyKey;
+						$sql = "UPDATE user SET SellKey=:s1, SellKeyPlatinum=:s2, CountCsh=:cc, ContLabelPirate=:clp WHERE id=:id";
+						break;
+					case 4:
+						$darr['s2'] = $USER->SellKeyPremium + $CountBuyKey;
+						$sql = "UPDATE user SET SellKey=:s1, SellKeyPremium=:s2, CountCsh=:cc, ContLabelPirate=:clp WHERE id=:id";
+						break;
+				}
+				$STH = $DBH->prepare($sql);
+				$STH->execute($darr);
+				openbox($locale['shop_msg_sucess']);
+				RedirectBox(BASEDIR.'shop.php');
 			}
-			$STH = $DBH->prepare($sql);
-			$STH->execute($darr);
-			openbox($locale['shop_msg_sucess']);
-			RedirectBox(BASEDIR.'shop.php');
+			else
+			{
+				openbox($locnav[3]);
+				echo '<tr><td class="shop" align="center">'.$locale['nonkeyshop'].'</td></tr>';
+				if ($USER->ContLabelPirate > 0)
+					echo '<tr><td class="shop" align="center">'.$locale['nonkeyshop2'].$USER->ContLabelPirate.'</td></tr>';
+				RedirectBox(BASEDIR.'shop.php');
+			}
 		}
 		else
 		{
@@ -76,7 +92,7 @@
 				$darr = array();
 				$darr['id'] = $USER->id;
 				$darr['cc'] = $USER->CountCsh - $DataLable[$iLables]['cost'];
-				if ($USER->TimerVipLabelPirate > date("Y-m-d H:i:s"))
+				if (strtotime($USER->TimerVipLabelPirate) > strtotime(date("Y-m-d H:i:s")))
 				{
 					$darr['d'] = date("Y-m-d H:i:s", strtotime("+".$Config['CountDayLabelPirate']." day", strtotime($USER->TimerVipLabelPirate)));
 				}

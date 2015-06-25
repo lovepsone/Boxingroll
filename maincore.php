@@ -66,6 +66,7 @@
 	while($row = $STH->fetch(PDO::FETCH_ASSOC))
 		$Config[$row['setting']] = $row['value'];
 
+	$Config['CountSecondsLabelPirate'] = $Config['CountDayLabelPirate']*24*60*60;
 
 	function getDataKey()
 	{
