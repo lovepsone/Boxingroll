@@ -151,42 +151,39 @@
 					echo '&nbsp;&nbsp;<img src="'.BASEDIR.'images/kopeck/3.png" height="12x"/> x '.$USER->KopeckPlatinum;
 					echo '&nbsp;&nbsp;<img src="'.BASEDIR.'images/kopeck/4.png" height="12px"/> x '.$USER->KopeckPremium;
 					echo '</td></td></tr>';
-
-					echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['lables'].'</b></span></td></tr>';
-					echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
-
-					if (strtotime($USER->TimerVipLabelPirate) > strtotime(date("Y-m-d H:i:s")))
-					{
-						$countSek = strtotime($USER->TimerVipLabelPirate) - strtotime(date("Y-m-d H:i:s"));
-						$val = $countSek*100/$Config['CountSecondsLabelPirate'];
-						echo '<tr><td colspan="2" class="boxRightText" align="left" valing="middle">&nbsp;&nbsp;';
-						echo '<img src="'.BASEDIR.'images/label/2.png" height="30px" style="position:relative; top: 10px;"/>&nbsp;&nbsp;'.$locale['hplables'];
-						echo '&nbsp;&nbsp;<meter value="'.$val.'" max="100" low="10" high="70">'.$val.' %</meter>';
-						echo '</td></td></tr>';
-					}
-					else if ($USER->ContLabelPirate > 0)
-					{
-						$val = $USER->ContLabelPirate*100/$Config['CountKeyLabelPirate'];
-						echo '<tr><td colspan="2" class="boxRightText" align="left" valing="middle">&nbsp;&nbsp;';
-						echo '<img src="'.BASEDIR.'images/label/1.png" height="30px" style="position:relative; top: 10px;"/>&nbsp;&nbsp;'.$locale['hplables'];
-						echo '&nbsp;&nbsp;<meter value="'.$val.'" max="100" low="10" high="70">'.$val.' %</meter>';
-						echo '</td></td></tr>';
-					}
-					else
-					{
-						$val = strtotime($USER->DateLabelPirate)+ 30*24*60*60 - strtotime(date("Y-m-d H:i:s"));
-						$val = round(($val/60)/60, 1);
-						echo '<tr><td colspan="2" class="boxRightText" align="left" valing="middle">&nbsp;&nbsp;';
-						echo '<img src="'.BASEDIR.'images/label/3.png" height="30px" style="position:relative; top: 10px;"/>&nbsp;&nbsp;'.$locale['dellables'];
-						echo '<br>&nbsp;'.$locale['timelables'].'&nbsp;'.$val;
-						echo '</td></td></tr>';	
-					}
 				}
 				else
 				{
 					echo '<tr><td colspan="10" style="padding: 0px;" width="100%"><table cellpadding="0" cellspacing="0" width="100%"><div id="GameUpdateUser" style="width:100%"></div></table></td></tr>';
 				}
-
+				echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['lables'].'</b></span></td></tr>';
+				echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
+				if (strtotime($USER->TimerVipLabelPirate) > strtotime(date("Y-m-d H:i:s")))
+				{
+					$countSek = strtotime($USER->TimerVipLabelPirate) - strtotime(date("Y-m-d H:i:s"));
+					$val = $countSek*100/$Config['CountSecondsLabelPirate'];
+					echo '<tr><td colspan="2" class="boxRightText" align="left" valing="middle">&nbsp;&nbsp;';
+					echo '<img src="'.BASEDIR.'images/label/2.png" height="30px" style="position:relative; top: 10px;"/>&nbsp;&nbsp;'.$locale['hplables'];
+					echo '&nbsp;&nbsp;<meter value="'.$val.'" max="100" low="10" high="70">'.$val.' %</meter>';
+					echo '</td></td></tr>';
+				}
+				else if ($USER->ContLabelPirate > 0)
+				{
+					$val = $USER->ContLabelPirate*100/$Config['CountKeyLabelPirate'];
+					echo '<tr><td colspan="2" class="boxRightText" align="left" valing="middle">&nbsp;&nbsp;';
+					echo '<img src="'.BASEDIR.'images/label/1.png" height="30px" style="position:relative; top: 10px;"/>&nbsp;&nbsp;'.$locale['hplables'];
+					echo '&nbsp;&nbsp;<meter value="'.$val.'" max="100" low="10" high="70">'.$val.' %</meter>';
+					echo '</td></td></tr>';
+				}
+				else
+				{
+					$val = strtotime($USER->DateLabelPirate)+ 30*24*60*60 - strtotime(date("Y-m-d H:i:s"));
+					$val = round(($val/60)/60, 1);
+					echo '<tr><td colspan="2" class="boxRightText" align="left" valing="middle">&nbsp;&nbsp;';
+					echo '<img src="'.BASEDIR.'images/label/3.png" height="30px" style="position:relative; top: 10px;"/>&nbsp;&nbsp;'.$locale['dellables'];
+					echo '<br>&nbsp;'.$locale['timelables'].'&nbsp;'.$val;
+					echo '</td></td></tr>';	
+				}
 				echo '<tr><td colspan="2"><span class="boxRightTitle"><b>'.$locale['CashInfo'].'</b></span></td></tr>';
 				echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
 				echo '<tr><td class="boxRightText">'.$locale['CountCsh'].'</td><td class="boxRightValue" align="right">'.$USER->CountCsh.'</td></tr>';
