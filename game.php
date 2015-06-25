@@ -64,7 +64,7 @@
 		if (debug) console.log('[DEBUG]: render [PixelRatio:%s] [offset(W/H):%s/%s]', window.devicePixelRatio, renderer.domElement.offsetWidth, renderer.domElement.offsetHeight);
 
 		scene = new THREE.Scene();
-		scene.fog = new THREE.Fog(0x708090, 0.115, 800);
+		scene.fog = new THREE.Fog(0x838b83, 0.115, 900);
 		raycaster = new THREE.Raycaster();
 		mouse = new THREE.Vector2();
 		clock = new THREE.Clock();
@@ -85,17 +85,19 @@
 
 	function initLight()
 	{
-		var ambient = new THREE.AmbientLight( 0x101010 );
+		var ambient = new THREE.AmbientLight(0x101010);
 		scene.add(ambient);
 
-		pointLight = new THREE.PointLight( 0xffffff );
+		pointLight = new THREE.PointLight(0x696969);
 		scene.add(pointLight);
 		var geometry = new THREE.SphereGeometry(100, 16, 8);
-		var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) );
+		var mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color: 0xffaa00}));
 		mesh.scale.set(0.05, 0.05, 0.05);
+		mesh.position.z = 200;
+		mesh.position.z = 400;
 		pointLight.add(mesh);
 		pointLight.position.z = 200;
-		pointLight.position.y = 400;
+		pointLight.position.y = 200;
 
 	}
 
@@ -136,8 +138,7 @@
 
 		loader.load('game/cave.json', function(geometry)
 		{
-			var texture = THREE.ImageUtils.loadTexture('game/cave.gif');
-			var material = new THREE.MeshPhongMaterial({ map: texture, specular:null, shininess: 0, shading: THREE.FlatShading });
+			var material = new THREE.MeshPhongMaterial({color: 0xdddddd, specular: 0x222222, shininess: 35, map: THREE.ImageUtils.loadTexture("game/cave.jpg"), specularMap: THREE.ImageUtils.loadTexture("game/cave_specularMap.jpg"), normalMap: THREE.ImageUtils.loadTexture("game/cave_normalMap.jpg"), normalScale: new THREE.Vector2( 0.8, 0.8 ), wrapRGB: new THREE.Vector3( 0.575, 0.5, 0.5 ), wrapAround: true });
 			meshCave = new THREE.Mesh(geometry, material);
 			meshCave.scale.set(90, 90, 90);
 			meshCave.position.y = -50;
