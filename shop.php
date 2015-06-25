@@ -85,7 +85,8 @@
 
 				$STH = $DBH->prepare("UPDATE user SET CountCsh=:cc, ContLabelPirate=:clp WHERE id=:id");
 				$STH->execute($darr);
-				Redirect(BASEDIR.'handle.php?cmd=0', true);
+				openbox($locale['shop_msg_sucess']);
+				RedirectBox(BASEDIR.'shop.php');
 			}
 			else if ($iLables == 1)
 			{
