@@ -16,13 +16,13 @@
 	}
 	function HeadMenu()
 	{
-		global $locnav, $locale, $_SESSION;
+		global $locnav, $locale;
 
 		echo '<table cellpadding="0" cellspacing="0"  class="HeadBody" border="0px">';
 		echo '<tr height="89px"><td class="HeadBodyLeft">Logotips</td>';
 		echo '<td width="760px" class="HeadBodyRight" align="left">';
 		echo '<div id="user"></div>';
-		if (!isset($_SESSION['user']) && !isset($_SESSION['id']) && !isset($_SESSION['p']))
+		if (!AUTH)
 		{
 			echo '<form id="logform" method="post"><table width="560px" border="0px" style="position:relative;margin-left:4%;"><tr><td>';
 			echo '<input type="text" id="AuthMail" class="inputAuth" value="Mail"/>';
@@ -31,7 +31,7 @@
 			echo '<input type="submit" name="AuthReg" value="'.$locale['b_reg'].'" style="width:140px;margin-left:5px;" class="BoxButton" />';
 			echo '</td></tr></table></form>';
 		}
-		else if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+		else if (AUTH)
 		{
 			echo '<form id="logform" method="post"><table width="560px" border="0px" style="position:relative;margin-left:5%;"><tr><td>';
 			echo '<div id="UserData"><input type="button" value="'.$locale['data'].'" style="width:130px;margin-left:5px;" class="BoxButton tips"/>';
@@ -101,7 +101,7 @@
 		}
 		else
 		{
-			if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+			if (AUTH)
 			{
 				if (defined("GAME_PAGE") && !GAME_PAGE)
 				{
@@ -178,11 +178,11 @@
 				echo '<tr><td class="boxRightText">'.$locale['overallCountAddCash'].'</td><td class="boxRightValue" align="right">0</td></tr>';
 			}
 			echo '<tr><td colspan="2" align="center"><hr width="90%"></td></tr>';
-			if (isset($_SESSION['gmlevel']) && $_SESSION['gmlevel'] > 3 && isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+			if (isset($_SESSION['gmlevel']) && $_SESSION['gmlevel'] > 3 && AUTH)
 			{
 				echo '<tr><td colspan="2" align="center"><a href="'.BASEDIR.'admin/index.php">'.$locale['AdminPanel'].'</a></td></tr>';
 			}
-			else if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+			else if (AUTH)
 			{
 				// ссылку на баг репорты
 			}

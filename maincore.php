@@ -88,7 +88,7 @@
 		$STH = $DBH->query("SELECT * FROM user WHERE id=".$_SESSION['id']." AND mail='".$_SESSION['user']."' AND password='".$_SESSION['p']."'");
 		$STH->execute();
 		$USER = $STH->fetch(PDO::FETCH_OBJ);
-
+		define("AUTH", true);
 		//*-----------------------------
 		//* system in game
 		//*------------------------------
@@ -189,6 +189,7 @@
 			}
 		}
 	}
+	else define("AUTH", false);
 	// locale
 	if(!@include(BASEDIR.'locale/'.$Config['StartLocale'].'/locale.php'))
 		die("<b>Error:</b> can not loaded locale!!!");

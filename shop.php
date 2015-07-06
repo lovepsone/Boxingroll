@@ -136,7 +136,7 @@
 	
 		}
 		
-		if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+		if (AUTH)
 		{
 			echo '<tr><td colspan="5" align="center" class="shop" height="30px">'.$locale['count'].'&nbsp;&nbsp;<input type="text" name="CountBuyKey" value="1" style="width:100px;" />';
 			echo '&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="BuyKey" value="'.$locale['buy'].'" style="width:170px;" class="BoxButton" /></td></tr>';
@@ -157,7 +157,7 @@
 			echo '<td align="center" class="shop" width="160px">'.$locale['CostKey'].'&nbsp;&nbsp;'.$DataLable[$i]['cost'].'&nbsp;p.</td>';
 			echo '<td align="center" class="shop" width="60px"><input name="lables" type="radio" value="'.$i.'" '.$check.'>&nbsp;</td></tr>';
 		}
-		if (isset($_SESSION['user']) && isset($_SESSION['id']) && isset($_SESSION['p']))
+		if (AUTH)
 		{
 			echo '<tr><td colspan="5" align="center" class="shop" height="30px"><input type="submit" name="BuyLable" value="'.$locale['buy'].'" style="width:170px;" class="BoxButton" /></td></tr>';
 		}
