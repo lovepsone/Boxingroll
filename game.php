@@ -27,7 +27,7 @@
 	var raycaster;
 	var mouse, MoseClick = true, MoseClickReturn = false, addRondValue = true;
 	var mesh, texture, MeshRoundValue;
-	var SCREEN_WIDTH = window.innerWidth - 600, SCREEN_HEIGHT = 500;
+	var SCREEN_WIDTH = window.innerWidth - 300, SCREEN_HEIGHT = 550;
 	var GroupChest, GroupKey, GroupText, GroupPlane, GroupKopeck;
 	var animDestruction = false, animDestructionReturn = false;
 	var VisibleKey, RotateKeys = true, animKeyStart = false, animKeyRotateVisible = false;
@@ -38,7 +38,7 @@
 	var pointLight;
 
 	var txtGameStart = '<span id="game-msg" style="position:absolute; left:370px; top:220px;"><?php echo $locale['GameStart']; ?></span>';
-	var txtGameLoad = '<span id="game-msg-loader" style="font-size:23px;position:absolute; left:' + (280 + SCREEN_WIDTH/2) + 'px; top:' + (180 + SCREEN_HEIGHT/2) + 'px;">Loading...</span>';
+	var txtGameLoad = '<span id="game-msg-loader" style="font-size:23px;position:absolute; left:' + (SCREEN_WIDTH/2) + 'px; top:' + (180 + SCREEN_HEIGHT/2) + 'px;">Loading...</span>';
 	var txtGameEnd = '<span id="game-msg" style="position:absolute; left:370px; top:220px;"><?php echo $locale['GameEnd']; ?> </span>';
 	GameUpdateUser();
 	init();

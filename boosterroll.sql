@@ -10,28 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-06-25 11:56:40
+Date: 2015-07-06 10:43:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
--- ----------------------------
--- Table structure for `chat`
--- ----------------------------
-DROP TABLE IF EXISTS `chat`;
-CREATE TABLE `chat` (
-  `id_msg` int(11) NOT NULL auto_increment,
-  `id_user` int(11) NOT NULL default '0',
-  `msg` text NOT NULL,
-  `msg_date` datetime default NULL,
-  PRIMARY KEY  (`id_msg`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of chat
--- ----------------------------
-INSERT INTO `chat` VALUES ('1', '1', 'Проверка чата!', '2015-05-31 16:21:17');
-INSERT INTO `chat` VALUES ('2', '1', 'Проверка цензуры: <span style=\'color:red\'>[Цензура]</span>', '2015-05-31 16:21:35');
-
 -- ----------------------------
 -- Table structure for `income`
 -- ----------------------------
@@ -48,7 +30,7 @@ CREATE TABLE `income` (
 -- ----------------------------
 -- Records of income
 -- ----------------------------
-INSERT INTO `income` VALUES ('1', '15', '0', '0', '0');
+INSERT INTO `income` VALUES ('1', '17', '0', '0', '0');
 INSERT INTO `income` VALUES ('2', '0', '0', '0', '0');
 
 -- ----------------------------
@@ -135,5 +117,5 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '44', '33', '3', '4', '4', '41', '28', '2', '10', '1', '23', '0', '0', '0', '0', '0', '0', '84050', '0', '2015-06-24 11:14:49', '0', '2015-06-24');
+INSERT INTO `user` VALUES ('1', 'lovepsone', 'lovepsone@mail.ru', 'ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4', 'i[91tG0)mo', '2015-05-18', '5', '52', '41', '3', '4', '4', '43', '30', '2', '10', '1', '25', '0', '0', '0', '0', '0', '0', '82800', '0', '2015-06-24 11:14:49', '20', '2015-06-24');
 INSERT INTO `user` VALUES ('2', 'roudi1990', 'roudi1990@mail.ru', 'c1dfd96eea8cc2b62785275bca38ac261256e278', 'qq[b3P~-9H', '2015-05-18', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '100000', '0', '0000-00-00 00:00:00', '30', '2015-06-24');

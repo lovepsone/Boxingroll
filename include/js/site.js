@@ -30,38 +30,4 @@ $(document).ready(function()
 		alert("dsads");
 		return true;
 	});
-
-	// чат
-	$('#chat-form').submit(function(event)
-	{
-		$('#chat-msg').attr("disabled", true);
-        	update($('#chat-msg').val());
-		return false;
-	});
-
-	function update(text)
-	{
-		$.ajax(
-		{
-			type: "POST",
-			url: "include/handle.chat.php",
-			data: {'data': text},
-			success: function(data)
-			{
-				$('#chat').html(data);
-				$('#chat-msg').attr("disabled", false);
-				$('#chat-msg').val('');
-				$('#chat').scrollTop(chat.scrollHeight);
-			}
-		});
-	}
-
-	update();
-	var timer;
-	function update_timer()
-	{
-        	if (timer) clearTimeout(timer);
-		timer = setTimeout(function () { update(); }, 5000);
-	}
-    	update_timer();
 });
