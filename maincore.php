@@ -227,17 +227,20 @@
 	$ValueOpenChest['chance'][0] = 1;
 
 	$ValueOpenChest['value'][1] = 20;
-	$ValueOpenChest['chance'][1] = 2;
+	$ValueOpenChest['chance'][1] = 3;
 
 	$ValueOpenChest['value'][2] = 10;
-	$ValueOpenChest['chance'][2] = 3;
+	$ValueOpenChest['chance'][2] = 6;
 
 	$ValueOpenChest['value'][3] = 5;
-	$ValueOpenChest['chance'][3] = 4;
+	$ValueOpenChest['chance'][3] = 20;
 
 	$ValueOpenChest['value'][4] = 1;
-	$ValueOpenChest['chance'][4] = 90;
+	$ValueOpenChest['chance'][4] = 60;
 
+	$ValueOpenChest['value'][5] = 0;
+	$ValueOpenChest['chance'][5] = 10;
+	
 	function RoundValueOpenChest()
 	{
 		global $ValueOpenChest;
