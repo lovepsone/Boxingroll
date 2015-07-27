@@ -1,6 +1,11 @@
 var cMeshProgress = 0, maxMeshKopeck = 4, cMeshLoad = 6 + maxMeshKopeck, group_m;
 var initStart = false, InitEnd = false;
-var meshChestH;
+
+var objects = {
+	chest: {},
+	keys: {},
+	kopeck: {}
+};
 
 var LOADERSCENE =
 {
@@ -54,11 +59,11 @@ var LOADERSCENE =
 				wrapAround: true
 			});
 			
-			this.mesh = new THREE.Mesh(geometry, material);
-			this.mesh.scale.set(100, 100, 100);
-			this.mesh.name = 'M_CHEST';
-			this.mesh.castShadow = true;
-			group_m.add(this.mesh);
+			objects.chest.m = new THREE.Mesh(geometry, material);
+			objects.chest.m.scale.set(100, 100, 100);
+			objects.chest.m.name = 'M_CHEST';
+			objects.chest.m.castShadow = true;
+			group_m.add(objects.chest.m);
 		});
 		
 		this.loader.load('game/chest/h_chest.json', function(geometry)
@@ -76,11 +81,11 @@ var LOADERSCENE =
 				wrapAround: true
 			});
 			
-			meshChestH = new THREE.Mesh(geometry, material);
-			meshChestH.scale.set(100, 100, 100);
-			meshChestH.name = 'H_CHEST';
+			objects.chest.h = new THREE.Mesh(geometry, material);
+			objects.chest.h.scale.set(100, 100, 100);
+			objects.chest.h.name = 'H_CHEST';
 			//this.mesh.castShadow = true;
-			group_m.add(meshChestH);
+			group_m.add(objects.chest.h);
 		});
 
 		this.loader.onLoadComplete = function()
@@ -106,12 +111,12 @@ var LOADERSCENE =
 				wrapAround: true
 			});
 			
-			this.mesh = new THREE.Mesh(geometry, material);
-			this.mesh.scale.set(100, 100, 100);
-			this.mesh.position.set(0, 0, 100);
-			this.mesh.name = 'keyNormal';
-			//this.mesh.castShadow = true;
-			group_m.add(this.mesh);
+			objects.keys[0] = new THREE.Mesh(geometry, material);
+			objects.keys[0].scale.set(100, 100, 100);
+			objects.keys[0].position.set(0, 0, 100);
+			objects.keys[0].name = 'keyNormal';
+			//objects.keys[0].castShadow = true;
+			group_m.add(objects.keys[0]);
 		});
 
 		this.loader.load('game/keys/keyGold.json', function(geometry)
@@ -128,12 +133,12 @@ var LOADERSCENE =
 				wrapAround: true
 			});
 			
-			this.mesh = new THREE.Mesh(geometry, material);
-			this.mesh.scale.set(100, 100, 100);
-			this.mesh.position.set(0, 0, 100);
-			this.mesh.name = 'keyGold';
+			objects.keys[1] = new THREE.Mesh(geometry, material);
+			objects.keys[1].scale.set(100, 100, 100);
+			objects.keys[1].position.set(0, 0, 100);
+			objects.keys[1].name = 'keyGold';
 			//this.mesh.castShadow = true;
-			group_m.add(this.mesh);
+			group_m.add(objects.keys[1]);
 		});
 		
 		this.loader.load('game/keys/keyPlatinum.json', function(geometry)
@@ -151,12 +156,12 @@ var LOADERSCENE =
 				wrapAround: true
 			});
 			
-			this.mesh = new THREE.Mesh(geometry, material);
-			this.mesh.scale.set(100, 100, 100);
-			this.mesh.position.set(0, 0, 100);
-			this.mesh.name = 'keyPlatinum';
+			objects.keys[2] = new THREE.Mesh(geometry, material);
+			objects.keys[2].scale.set(100, 100, 100);
+			objects.keys[2].position.set(0, 0, 100);
+			objects.keys[2].name = 'keyPlatinum';
 			//this.mesh.castShadow = true;
-			group_m.add(this.mesh);
+			group_m.add(objects.keys[2]);
 		});
 		
 		this.loader.load('game/keys/keyPremium.json', function(geometry)
@@ -174,12 +179,12 @@ var LOADERSCENE =
 				wrapAround: true
 			});
 			
-			this.mesh = new THREE.Mesh(geometry, material);
-			this.mesh.scale.set(100, 100, 100);
-			this.mesh.position.set(0, 0, 100);
-			this.mesh.name = 'keyPremium';
+			objects.keys[3] = new THREE.Mesh(geometry, material);
+			objects.keys[3].scale.set(100, 100, 100);
+			objects.keys[3].position.set(0, 0, 100);
+			objects.keys[3].name = 'keyPremium';
 			//this.mesh.castShadow = true;
-			group_m.add(this.mesh);
+			group_m.add(objects.keys[3]);
 		});
 
 		this.loader.onLoadComplete = function()
@@ -203,10 +208,10 @@ var LOADERSCENE =
 				wrapAround: true
 			});
 			
-			this.mesh = new THREE.Mesh(geometry, material);
-			this.mesh.name = 'kopeckNormal';
+			objects.kopeck[0] = new THREE.Mesh(geometry, material);
+			objects.kopeck[0].name = 'kopeckNormal';
 			//this.mesh.castShadow = true;
-			group_m.add(this.mesh);
+			group_m.add(objects.kopeck[0]);
 		});
 
 		this.loader.load('game/kopeck/kopeckNormal.json', function(geometry)
@@ -222,10 +227,10 @@ var LOADERSCENE =
 				wrapAround: true
 			});
 			
-			this.mesh = new THREE.Mesh(geometry, material);
-			this.mesh.name = 'kopeckGold';
+			objects.kopeck[1] = new THREE.Mesh(geometry, material);
+			objects.kopeck[1].name = 'kopeckGold';
 			//this.mesh.castShadow = true;
-			group_m.add(this.mesh);
+			group_m.add(objects.kopeck[1]);
 		});
 
 		this.loader.load('game/kopeck/kopeckNormal.json', function(geometry)
@@ -241,10 +246,10 @@ var LOADERSCENE =
 				wrapAround: true
 			});
 			
-			this.mesh = new THREE.Mesh(geometry, material);
-			this.mesh.name = 'kopeckPlatinum';
+			objects.kopeck[2] = new THREE.Mesh(geometry, material);
+			objects.kopeck[2].name = 'kopeckPlatinum';
 			//this.mesh.castShadow = true;
-			group_m.add(this.mesh);
+			group_m.add(objects.kopeck[2]);
 		});
 
 		this.loader.load('game/kopeck/kopeckNormal.json', function(geometry)
@@ -260,10 +265,10 @@ var LOADERSCENE =
 				wrapAround: true
 			});
 			
-			this.mesh = new THREE.Mesh(geometry, material);
-			this.mesh.name = 'kopeckPremium';
-			//this.mesh.castShadow = true;
-			group_m.add(this.mesh);
+			objects.kopeck[3] = new THREE.Mesh(geometry, material);
+			objects.kopeck[3].name = 'kopeckPremium';
+			//objects.kopeck[3].castShadow = true;
+			group_m.add(objects.kopeck[3]);
 		});
 		this.loader.onLoadComplete = function()
 		{

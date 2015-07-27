@@ -83,7 +83,7 @@
 		renderer.shadowMapEnabled = true;
 		$("#BoxingRollGame").append(renderer.domElement);
 
-		camera = new THREE.PerspectiveCamera(90, renderer.domElement.offsetWidth / renderer.domElement.offsetHeight, 1, 70);
+		camera = new THREE.PerspectiveCamera(50, renderer.domElement.offsetWidth / renderer.domElement.offsetHeight, 1, 70);
 		camera.position.z = 36;//24
 		camera.position.y = 22;//12
 
@@ -177,7 +177,7 @@
 			DBH_AddOpenChest();
 			DBH_DeleteKey(InputKey);
 			DBH_UpdateIncome(InputKey);
-			meshKeyInput = scene.children[2].children[2+InputKey];
+			meshKeyInput = objects.keys[InputKey];
 
 			new TWEEN.Tween(meshKeyInput.rotation).to({x: 0, y: 0, z: 0}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
 			new TWEEN.Tween(meshKeyInput.position).to({x: 0, y: 5.9, z: 15}, 2000 ).easing(TWEEN.Easing.Elastic.Out).start();
@@ -238,8 +238,9 @@
 				animTimerCamera = 0.00;
 				$("#BoxingRollGame").append(locGameStart);
 				meshKopeck.position.set(0, 0, 0);
-				new TWEEN.Tween(meshChestH.rotation).to({x: 0, y: 0, z: 0}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
-				new TWEEN.Tween(meshChestH.position).to({x: 0, y: 0, z: 0}, 10000).easing(TWEEN.Easing.Elastic.Out).start();
+				new TWEEN.Tween(objects.chest.h.rotation).to({x: 0, y: 0, z: 0}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
+				new TWEEN.Tween(objects.chest.h.position).to({x: 0, y: 0, z: 0}, 10000).easing(TWEEN.Easing.Elastic.Out).start();
+				MoseClick = true;
 			}
 		}
 		
@@ -270,13 +271,13 @@
 		// анимация открытия сундука
 		if (animOpenChest)
 		{
-			new TWEEN.Tween(meshChestH.rotation).to({x: 1, y: 1.2, z: 0.3}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
-			new TWEEN.Tween(meshChestH.position).to({x: 10, y: 10, z: -90}, 10000).easing(TWEEN.Easing.Elastic.Out).start();
+			new TWEEN.Tween(objects.chest.h.rotation).to({x: 1, y: 1.2, z: 0.3}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
+			new TWEEN.Tween(objects.chest.h.position).to({x: 10, y: 10, z: -90}, 10000).easing(TWEEN.Easing.Elastic.Out).start();
 			new TWEEN.Tween(meshKeyInput.rotation).to({x: 1, y: 1.2, z: 0.3}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
 			new TWEEN.Tween(meshKeyInput.position).to({x: 30, y: 0, z: 90}, 10000).easing(TWEEN.Easing.Elastic.Out).start();
 			animOpenChest = false;
 			// инициализация анимации копеек/метки
-			meshKopeck = scene.children[2].children[2+InputKey+(4-InputKey) + InputKey];
+			meshKopeck = objects.kopeck[InputKey];
 			direction = getRandomInt(0, 2);
 			startTimeAnim = performance.now()/1000;
 			animKopeckStart = true;
